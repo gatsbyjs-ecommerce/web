@@ -7,8 +7,8 @@ module.exports = {
     'A ecommerce system using ReactJs, bundled with awesome GatsbyJs.',
   siteUrl: 'http://kickoff-gatsbyjs.netlify.com',
   logo: '/images/logo-1024.png',
-  graphQlUri: 'http://localhost:4000/',
-  graphQlUriDev: 'http://localhost:4000/',
+  graphQlUri: 'https://6in-api.now.sh/api',
+  graphQlUriDev: 'https://6in-api.now.sh/api',
 
   homeBannerImage: '/images/home-bg-3.jpg',
   type: 'website',

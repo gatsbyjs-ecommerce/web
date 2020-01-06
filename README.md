@@ -6,6 +6,8 @@ A minimalist static E-commerce site built using GatsbyJs.
 
 [Admin Panel](https://sixin.sanity.studio/)
 
+[API Endpoint](https://6in-api.now.sh/api)
+
 [Graphql Endpoint](https://1noazxoy.api.sanity.io/v1/graphql/production/default)
 
 Admin panel can be found in [Admin repository](https://github.com/gatsbyjs-ecommerce/admin)
