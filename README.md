@@ -2,6 +2,8 @@
 
 A minimalist static E-commerce site built using GatsbyJs.
 
+[Web Preview](https://6in.netlify.com/)
+
 [Admin Panel](https://sixin.sanity.studio/)
 
 [Graphql Endpoint](https://1noazxoy.api.sanity.io/v1/graphql/production/default)
