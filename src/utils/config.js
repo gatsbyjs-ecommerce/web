@@ -10,13 +10,13 @@ module.exports = {
   graphQlUri: 'https://6in-api.now.sh/api',
   graphQlUriDev: 'https://6in-api.now.sh/api',
 
-  homeBannerImage: '/images/home-bg-3.jpg',
+  homeBannerImage: '/images/home-hero-bg.webp',
   type: 'website',
   googleAnalytics: '',
   backgroundColor: '#e0e0e0',
   themeColor: '#c62828',
 
-  currency: '£',
+  currency: '₹',
   stripePublishableKey:
     process.env.NODE_ENV === 'development'
       ? 'pk_test_P0DEB2otulfya51U9lIkLXAn'

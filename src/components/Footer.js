@@ -16,6 +16,9 @@ const Container = styled.footer`
   p {
     color: #ffffff !important;
   }
+  li {
+    margin-bottom: 1rem;
+  }
 `;
 
 const Heading = styled.p`
@@ -40,6 +43,7 @@ const NavItems = [
   { id: 1, name: 'About us', url: '/page/about' },
   { id: 3, name: 'Terms and Conditions', url: '/page/terms-and-condition' },
   { id: 4, name: 'Privacy Policy', url: '/page/privacy-policy' },
+  { id: 4, name: 'Blog', url: '/blog' },
 ];
 
 const Footer = ({ home }) => (
@@ -47,7 +51,9 @@ const Footer = ({ home }) => (
     <div className="section container is-hidden-mobile">
       <div className="columns is-multiline">
         <div className="column has-text-white">
-          <Heading className="is-uppercase is-size-5">Customer service</Heading>
+          <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+            SUPPORT
+          </Heading>
           <ul>
             {NavItems.map(item => (
               <li key={item.id}>
@@ -59,12 +65,16 @@ const Footer = ({ home }) => (
           </ul>
         </div>
         <div className="column has-text-white">
-          <Heading className="is-uppercase is-size-5">Subscribe</Heading>
+          <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+            Subscribe
+          </Heading>
           <p>Receive special offers when you signup our mailing list</p>
           <SubscribeForm />
         </div>
         <div className="column has-text-white">
-          <Heading className="is-uppercase is-size-5">Connect</Heading>
+          <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+            Connect
+          </Heading>
           <SocialIcons data={home} inverted />
         </div>
       </div>
@@ -73,7 +83,7 @@ const Footer = ({ home }) => (
       <div className="section container">
         <div className="columns has-text-white">
           <div className="column">
-            <p>Copyright © 2018 - {config.siteName}</p>
+            <p>Copyright © 2020 - {config.siteName}</p>
           </div>
           <div className="column has-text-right is-hidden-mobile">
             <img

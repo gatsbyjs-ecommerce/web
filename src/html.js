@@ -25,13 +25,9 @@ export default class HTML extends React.Component {
             defer
             src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
           />
-          <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap"
-            rel="stylesheet"
-          />
           <script src="/js/scripts.js" />
           <link
-            href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700"
+            href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700&display=swap"
             rel="stylesheet"
           />
           {/* Add custom css or scripts here */}

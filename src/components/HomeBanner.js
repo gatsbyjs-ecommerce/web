@@ -3,6 +3,13 @@ import styled from 'styled-components';
 
 import config from '../utils/config';
 
+const Container = styled.div`
+  margin-left: 10rem !important;
+  margin-right: 10rem !important;
+  max-height: 600px;
+  overflow: hidden;
+`;
+
 const ContainerImage = styled.div`
   width: 100%;
   height: auto;
@@ -20,7 +27,7 @@ const StripMobile = styled.div`
 `;
 
 const HomeBanner = ({ data }) => (
-  <>
+  <Container className="container is-fluid">
     <ContainerImage className="is-hidden-mobile">
       <img src={config.homeBannerImage} alt="home banner" />
     </ContainerImage>
@@ -29,7 +36,7 @@ const HomeBanner = ({ data }) => (
         {data.homeSliderSubTitle}
       </p>
     </StripMobile>
-  </>
+  </Container>
 );
 
 export default HomeBanner;

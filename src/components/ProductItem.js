@@ -12,79 +12,46 @@ const Container = styled(animated.div)`
   .card {
     border: none;
     box-shadow: none;
-    .image.is-4by5 {
-      padding-top: 0;
-    }
-    .card-content {
-      padding-left: 0;
-      padding-top: 0.8rem;
-      position: relative;
-      a {
-        color: #363636;
-      }
-      .price-container {
-        width: 150px;
-        position: absolute;
-        right: 0;
-        top: 0.5rem;
-      }
-      .price {
-        color: ${config.primaryColor};
-      }
-      .old-price {
-        text-decoration: line-through;
-      }
-    }
+  }
+  .card-content {
+    padding: 1rem 0;
+  }
+  .card-image {
+    min-height: 241px;
+  }
+  .image.is-4by5 {
+    padding-top: 0;
   }
 `;
 
 const Image = styled(Img)`
   object-fit: cover;
-  height: 540px;
-  width: 100%;
 `;
 
 const ProductItem = ({ item, styles }) => (
-  <Container className="column is-one-third" style={styles}>
+  <Container className="column is-one-quarter" style={styles}>
     <div className="card">
-      {item.variant.featuredImage && (
+      <Link to={`/product/${item.slug.current}`}>
         <div className="card-image">
-          <Link to={`/product/${item.slug.current}`}>
-            <figure className="image is-4by5">
-              <Image fluid={item.variant.featuredImage.asset.fluid} />
-              {/* <Image
-                sizes={item.variant.featuredImage.asset.fluid.sizes}
-                alt={item.variant.featuredImage.asset.fluid.title}
-                title={item.variant.featuredImage.asset.fluid.title}
-                backgroundColor="#f1f1f1"
-              /> */}
-            </figure>
-          </Link>
+          {item.variant.featuredImage ? (
+            <Image fluid={item.variant.featuredImage.asset.fluid} />
+          ) : (
+            <img
+              src="https://bulma.io/images/placeholders/1280x960.png"
+              alt="Placeholder image"
+            />
+          )}
         </div>
-      )}
+      </Link>
       <div className="card-content">
         <div className="media">
           <div className="media-content">
-            <p className="title is-5" style={{ maxWidth: '88%' }}>
+            <p className="subtitle is-6">
               <Link to={`/product/${item.slug.current}`}>{item.title}</Link>
             </p>
-            {item.variant && (
-              <p className="subtitle is-6 has-text-grey">
-                {item.variant.color}
-              </p>
-            )}
-            {item.variant && (
-              <div className="price-container has-text-right">
-                <p className="title is-5 has-text-weight-normal price">
-                  {formatCurrency(item.variant.discountPrice)}
-                </p>
-                {item.variant.discountPrice < item.variant.price && (
-                  <p className="subtitle is-6 has-text-grey-light old-price">
-                    {formatCurrency(item.variant.price)}
-                  </p>
-                )}
-              </div>
-            )}
+            <p className="title is-6">
+              {formatCurrency(item.variant.discountPrice)}
+            </p>
           </div>
         </div>
       </div>

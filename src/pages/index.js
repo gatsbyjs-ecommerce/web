@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 import HomeBanner from '../components/HomeBanner';
 import ProductsList from '../components/ProductsList';
 import HomeAbout from '../components/HomeAbout';
+import FeaturedCategories from '../components/FeaturedCategories';
 
 export const query = graphql`
   query HomePageQuery {
@@ -53,11 +54,10 @@ const HomePage = ({ data }) => {
         description={home.description}
         url={config.siteUrl}
       />
-      <div className="container">
-        <HomeBanner data={home} />
-        <ProductsList products={products} />
-        <HomeAbout data={home} />
-      </div>
+      <HomeBanner data={home} />
+      <FeaturedCategories />
+      <ProductsList products={products} />
+      <HomeAbout data={home} />
     </Layout>
   );
 };

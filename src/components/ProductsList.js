@@ -31,14 +31,15 @@ class ProductsList extends React.Component {
     const keys = products.map(item => item.node._id);
 
     return (
-      <Container className="section">
+      <Container className="container">
         <Heading>{title}</Heading>
         <div className="columns is-multiline">
           <Trail
             native
             from={{ opacity: 0 }}
             to={{ opacity: isOpen ? 1 : 0.25 }}
-            keys={keys}>
+            keys={keys}
+          >
             {products.map(({ node }) => styles => (
               <ProductItem key={node._id} item={node} styles={styles} />
             ))}

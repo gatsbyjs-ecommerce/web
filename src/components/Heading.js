@@ -13,7 +13,7 @@ const Line = styled.div`
 
 const Heading = ({ children }) => (
   <>
-    <h4 className="is-size-4 has-text-centered is-uppercase has-text-weight-bold">
+    <h4 className="is-size-4 is-uppercase has-text-weight-semibold">
       {children}
     </h4>
     <Line />

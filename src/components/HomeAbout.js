@@ -6,12 +6,13 @@ import Heading from './Heading';
 
 const Container = styled.section`
   position: relative;
+  margin-top: 5rem;
 `;
 
 const HomeAbout = ({ data }) => (
-  <Container className="section">
+  <Container className="container">
     <Heading>Who we are</Heading>
-    <HTMLContent className="has-text-centered" content={data.homeIntro} />
+    <HTMLContent content={data.homeIntro} />
   </Container>
 );
 

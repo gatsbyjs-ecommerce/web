@@ -2,9 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset-advanced';
 import { darken, lighten } from 'polished';
 
-const mainBrandColor = '#00D1B2';
-const lightShades = '#F5F5F5';
-const darkAccent = '#3173DC';
+const mainBrandColor = '#E38D60';
+const lightShades = '#F8FAF9';
+const darkAccent = '#B75756';
 const darkShades = '#0A0A0A';
 
 export const theme = {
@@ -12,7 +12,7 @@ export const theme = {
   mainBrandColor,
   // Accent colors can be used to bring attention to design elements
   // by contrasting with the rest of the palette.
-  lightAccent: '#FFDC57',
+  lightAccent: '#F2B58A',
   // Use this color as the background for your dark-on-light designs,
   // or the text color of an inverted design.
   lightShades,
@@ -25,7 +25,7 @@ export const theme = {
   dangerColor: '#f44336',
 
   primaryColor: mainBrandColor,
-  borderColor: '#e0e6ef',
+  borderColor: '#eeeeee',
   backgroundColor: '#FFFFFF',
   backgroundInputColor: lightShades,
   backgroundInputColorDark: darkShades,
@@ -34,12 +34,13 @@ export const theme = {
   fontSizeExtraSmall: 12,
   fontSizeMedium: 18,
   fontSizeLarge: 22,
-  textColor: darkShades, // '#0A0B11',
+  textColor: '#707070',
   textColorInverse: lightShades,
   textColorLite: '#8B8989',
+  textColorDark: '#282828',
   menuTintColor: darkAccent,
-  primaryFontFamily: "'Open Sans', sans-serif",
-  secondaryFontFamily: "'Open Sans', sans-serif",
+  primaryFontFamily: "'Muli', sans-serif",
+  secondaryFontFamily: "'Muli', sans-serif",
   boxShadow: 'rgba(0,0,0,0.08) 0px 7px 18px',
 };
 
@@ -51,6 +52,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${theme.textColor};
     letter-spacing: 0.03rem !important;
     font-size: 17px;
+    line-height: 19px;
   }
   .title {
     font-family: ${theme.primaryFontFamily};
@@ -94,6 +96,12 @@ const GlobalStyle = createGlobalStyle`
   }
   .has-text-warning {
     color: ${theme.lightAccent} !important;
+  }
+  .notification {
+    background-color: #EEEEEE;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: ${theme.textColorDark};
   }
 `;
 

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Spring, animated } from 'react-spring';
 import { Link } from 'gatsby';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-
-import config from '../utils/config';
-import SocialIcons from './SocialIcons';
+import { darken } from 'polished';
 
 const cartQuery = gql`
   query CartItems {
@@ -18,228 +15,144 @@ const cartQuery = gql`
 `;
 
 const Container = styled.div`
-  margin-top: 0.6rem;
-  a {
-    color: #4a4a4a;
+  padding: 1rem 0;
+  border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
+  margin-bottom: 2rem;
+
+  .cart-count {
+    font-size: 0.8rem;
+    color: ${props => props.theme.mainBrandColor};
+    margin-top: -14px;
+    margin-left: 2px;
   }
-  .navbar {
-    margin-bottom: 0.6rem;
+
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 500;
   }
+
   .navbar-menu {
-    flex-grow: unset;
-    margin: 0 auto;
-    .navbar-item {
-      font-size: 1.1rem;
-    }
-    .navbar-item:hover {
-      color: #4a4a4a;
-    }
+    padding-left: 6rem;
   }
-  img.logo {
-    max-width: 150px;
+
+  .navbar-item,
+  .navbar-link {
+    color: ${props => props.theme.textColor};
+  }
+  .navbar-link:not(.is-arrowless) {
+    padding-right: 0.5;
+  }
+  .navbar-link:not(.is-arrowless)::after {
+    display: none;
+  }
+  .navbar-item.has-dropdown:hover .navbar-link,
+  a.navbar-item:hover {
+    background-color: transparent;
+    color: ${props => darken(0.75, props.theme.textColor)};
   }
 `;
 
-const ContainerMobile = styled.div`
-  position: relative;
-  img {
-    width: 100px;
-    margin-top: 1rem;
-    margin-left: 1rem;
-  }
-  .menu-trigger {
-    position: absolute;
-    top: 4rem;
-    right: 1rem;
-    font-size: 1.4rem;
-    color: #4a4a4a;
-  }
-`;
-
-const MobileMenu = styled(animated.div)`
-  && {
-    position: fixed;
-    left: 0;
-    top: 161px;
-    height: 100%;
-    width: 100%;
-    background-color: #2f2f2f;
-    z-index: 2;
-    padding: 2rem;
-    overflow: hidden;
-    a {
-      color: #fff;
-    }
-    .social {
-      margin-left: 1.2rem;
-      margin-top: 2rem;
-      > section {
-        width: 240px;
-        .level-item {
-          float: left;
-        }
-      }
-    }
-  }
-`;
-
-const Cart = styled.div`
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  width: 80px;
-  float: right;
-  position: relative;
-  a {
-    color: #4a4a4a !important;
-  }
-  span {
-    font-weight: 700;
-    padding: 0 0.1rem 0 0.5rem;
-  }
-  .count {
-    background-color: ${config.primaryColor};
-    color: #fff;
-    font-size: 0.6rem;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-    border-radius: 8px;
-    position: absolute;
-    top: -3px;
-    left: 22px;
-  }
-`;
-
-const CartMobile = styled.div`
-  width: 8rem;
-  float: right;
-  margin-top: 6rem;
-  margin-right: 0.3rem;
-  .count {
-    left: 16px;
-  }
-`;
-
-const NavItems = [
-  { id: 1, name: 'New In', url: '/' },
-  { id: 2, name: 'Coupons', url: '/coupons' },
-  { id: 3, name: 'Blog', url: '/blog' },
-  { id: 4, name: 'About', url: '/page/about' },
-  { id: 5, name: 'Contact', url: '/contact' },
-];
-
-const Header = ({ home }) => {
-  const [mobileMenuActive, setMobileMenuActive] = useState(false);
+const Header = () => {
   const { data } = useQuery(cartQuery);
   const cartItems = data ? data.cartItems || [] : [];
 
-  const cart = (
-    <Cart>
-      <Link to="/cart">
-        <i className="fas fa-shopping-cart" />
-        <span>Cart</span>{' '}
-        {cartItems.length > 0 && (
-          <div className="count">{cartItems.length}</div>
-        )}
-      </Link>
-    </Cart>
-  );
-
-  const toggleMobileMenu = () => {
-    // if (mobileMenuActive) {
-    //   $('html').removeClass('disable-scroll');
-    // } else {
-    //   $('html').addClass('disable-scroll');
-    // }
-    setMobileMenuActive(!mobileMenuActive);
-  };
-
   return (
-    <div className="container">
-      <Container className="is-hidden-mobile">
-        <div className="columns">
-          <div className="column">
-            <SocialIcons data={home} />
-          </div>
-          <div className="column has-text-centered">
-            <Link to="/">
-              <img
-                src={config.logo}
-                className="logo"
-                alt={`${config.siteName} logo`}
-              />
+    <Container>
+      <div className="container">
+        <nav className="navbar" role="navigation" aria-label="main navigation">
+          <div className="navbar-brand">
+            <Link to="/" className="navbar-item">
+              6in
             </Link>
+
+            <a
+              role="button"
+              className="navbar-burger burger"
+              aria-label="menu"
+              aria-expanded="false"
+              data-target="navbarBasicExample"
+            >
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+            </a>
           </div>
-          <div className="column has-text-right has-text-weight-semibold	">
-            <p>
-              <a href={`mailto:${home.email}`}>{home.email}</a> |{' '}
-              <a href={`tel:${home.telephone}`}>{home.telephone}</a>
-            </p>
-            {cart}
-          </div>
-        </div>
-        <nav
-          className="navbar has-background-white-ter"
-          role="navigation"
-          aria-label="main navigation">
-          <div className="navbar-menu is-uppercase has-text-weight-bold">
-            {NavItems.map(item => (
-              <Link to={item.url} className="navbar-item" key={item.id}>
-                {item.name}
+
+          <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-start">
+              <div className="navbar-item has-dropdown is-hoverable">
+                <Link to="/iphone" className="navbar-link">
+                  iPhone
+                </Link>
+                <div className="navbar-dropdown">
+                  <Link to="/iphone-11-pro" className="navbar-item">
+                    iPhone 11
+                  </Link>
+                  <Link to="/iphone-11-pro" className="navbar-item">
+                    iPhone 11 Pro
+                  </Link>
+                  <Link to="/iphone-11-pro-max" className="navbar-item">
+                    iPhone 11 Pro Max
+                  </Link>
+                </div>
+              </div>
+
+              <div className="navbar-item has-dropdown is-hoverable">
+                <Link to="/apple-watch" className="navbar-link">
+                  Apple Watch
+                </Link>
+                <div className="navbar-dropdown">
+                  <Link to="/apple-watch-leather" className="navbar-item">
+                    Leather Straps
+                  </Link>
+                  <Link to="/apple-watch-steel" className="navbar-item">
+                    Steel Straps
+                  </Link>
+                  <Link to="/apple-watch-sports" className="navbar-item">
+                    Sports Straps
+                  </Link>
+                </div>
+              </div>
+
+              <div className="navbar-item has-dropdown is-hoverable">
+                <Link to="/accessories" className="navbar-link">
+                  Accessories
+                </Link>
+                <div className="navbar-dropdown">
+                  <Link to="/airpods-case" className="navbar-item">
+                    Airpods Case
+                  </Link>
+                </div>
+              </div>
+
+              <div className="navbar-item has-dropdown is-hoverable">
+                <Link to="/help" className="navbar-link">
+                  Help
+                </Link>
+                <div className="navbar-dropdown">
+                  <Link to="/contact" className="navbar-item">
+                    Contact
+                  </Link>
+                  <Link to="/shipping-info" className="navbar-item">
+                    Shipping
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="navbar-end">
+              <Link to="/account" className="navbar-item">
+                <i className="fas fa-user" />
               </Link>
-            ))}
+              <Link to="/cart" className="navbar-item">
+                <i className="fas fa-shopping-cart" />
+                <div className="cart-count">{cartItems.length}</div>
+              </Link>
+            </div>
           </div>
         </nav>
-      </Container>
-      <ContainerMobile className="is-hidden-tablet">
-        <div className="columns is-mobile">
-          <div className="column">
-            <Link to="/">
-              <img src={config.logo} alt={`${config.siteName} logo`} />
-            </Link>
-          </div>
-          <div className="column">
-            {mobileMenuActive ? (
-              <span>
-                <a onClick={toggleMobileMenu}>
-                  <i className="fas fa-times menu-trigger" />
-                </a>
-              </span>
-            ) : (
-              <a onClick={toggleMobileMenu}>
-                <i className="fas fa-bars menu-trigger" />
-              </a>
-            )}
-            <CartMobile>{cart}</CartMobile>
-          </div>
-        </div>
-        <Spring
-          native
-          from={{ height: 0, opacity: 0, paddingTop: '-64px' }}
-          to={{
-            height: mobileMenuActive ? 800 : 0,
-            opacity: mobileMenuActive ? 1 : 0,
-            paddingTop: mobileMenuActive ? 0 : -64,
-          }}>
-          {styles => (
-            <MobileMenu style={styles}>
-              <aside className="menu">
-                <ul className="menu-list is-uppercase has-text-weight-bold is-size-4">
-                  {NavItems.map(item => (
-                    <li key={item.id} onClick={toggleMobileMenu}>
-                      <Link to={item.url}>{item.name}</Link>
-                    </li>
-                  ))}
-                  <li className="social">
-                    <SocialIcons data={home} inverted />
-                  </li>
-                </ul>
-              </aside>
-            </MobileMenu>
-          )}
-        </Spring>
-      </ContainerMobile>
-    </div>
+      </div>
+    </Container>
   );
 };
 

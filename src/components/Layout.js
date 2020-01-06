@@ -44,7 +44,7 @@ const IndexLayout = ({ children, hideHeader }) => {
             const home = data.sanitySiteSettings;
             return (
               <>
-                {!hideHeader && <Header home={home} />}
+                {!hideHeader && <Header />}
                 <Container>{children}</Container>
                 <Footer home={home} />
               </>
