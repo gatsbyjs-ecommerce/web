@@ -1,7 +1,7 @@
 module.exports = {
   debug: process.env.NODE_ENV === 'development',
 
-  siteName: 'GatsbyJs Ecommerce',
+  siteName: '6in.co',
   author: 'Parminder Klair',
   description:
     'A ecommerce system using ReactJs, bundled with awesome GatsbyJs.',
