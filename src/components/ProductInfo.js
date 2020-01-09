@@ -113,6 +113,7 @@ const ProductInfo = ({ product, home }) => {
   const client = useApolloClient();
   const { data } = useQuery(cartQuery);
   const { cartItems } = data || {};
+  const variant = product.otherVariants[0];
   // console.log('product', product);
 
   useEffect(() => {
@@ -130,10 +131,10 @@ const ProductInfo = ({ product, home }) => {
 
     const itemData = {
       id: product._id,
-      sku: product.variant.sku,
+      sku: variant.sku,
       title: product.title,
-      price: product.variant.price,
-      image: product.variant.featuredImage.asset.fluid.src,
+      price: variant.price,
+      image: variant.featuredImage.asset.fluid.src,
       quantity: 1,
       __typename: 'CartItem',
     };
@@ -148,9 +149,9 @@ const ProductInfo = ({ product, home }) => {
     <>
       <Heading>{product.title}</Heading>
       <Price className="has-text-weight-semibold has-text-centered">
-        {formatCurrency(product.variant.discountPrice)}{' '}
-        {product.variant.discountPrice < product.variant.price && (
-          <span>{formatCurrency(product.variant.price)}</span>
+        {formatCurrency(variant.discountPrice)}{' '}
+        {variant.discountPrice < variant.price && (
+          <span>{formatCurrency(variant.price)}</span>
         )}
       </Price>
       <Spring native from={{ opacity: 0 }} to={{ opacity: isVisible ? 1 : 0 }}>
@@ -158,7 +159,8 @@ const ProductInfo = ({ product, home }) => {
           <animated.div style={stylesProps}>
             <BuyBtn
               className="product-info-btn button is-dark is-large is-radiusless is-uppercase"
-              onClick={() => addToCart()}>
+              onClick={() => addToCart()}
+            >
               Add to cart
             </BuyBtn>
             <AccordionStyled>
@@ -173,10 +175,10 @@ const ProductInfo = ({ product, home }) => {
                   {/* <HTMLContent
                     content={product.shortDetails.childMarkdownRemark.html}
                   /> */}
-                  <p>Color: {product.variant.color}</p>
+                  <p>Color: {variant.color}</p>
                   <p>Made in India</p>
                   <p>All prices include sales taxes and free UK delivery.</p>
-                  <ProductCode>Product Code: {product.variant.sku}</ProductCode>
+                  <ProductCode>Product Code: {variant.sku}</ProductCode>
                 </AccordionItemBody>
               </AccordionItem>
               <AccordionItem>
@@ -198,7 +200,8 @@ const ProductInfo = ({ product, home }) => {
                     <FacebookShareButton
                       url={metaUrl}
                       quote={metaTitle}
-                      hashtag="#sejalsuits">
+                      hashtag="#sejalsuits"
+                    >
                       <i className="fab fa-facebook-square" />
                     </FacebookShareButton>
                   </div>
@@ -206,7 +209,8 @@ const ProductInfo = ({ product, home }) => {
                     <TwitterShareButton
                       url={metaUrl}
                       title={metaTitle}
-                      hashtags={['sejalsuits', 'punjabisuits']}>
+                      hashtags={['sejalsuits', 'punjabisuits']}
+                    >
                       <i className="fab fa-twitter-square" />
                     </TwitterShareButton>
                   </div>

@@ -40,9 +40,11 @@ class ProductGallery extends React.Component {
       ? global.window.innerWidth < 768
       : false;
 
+    const variant = product.otherVariants[0];
+
     // console.log('images', product.variant.images);
-    const images = product.variant.images
-      ? product.variant.images.map(image => ({
+    const images = variant.images
+      ? variant.images.map(image => ({
           original: image.asset.fluid.src,
           thumbnail: image.asset.fluid.src,
         }))
@@ -57,7 +59,8 @@ class ProductGallery extends React.Component {
           to={{
             opacity: isVisible ? 1 : 0,
             marginLeft: isVisible ? 0 : -100,
-          }}>
+          }}
+        >
           {styles => (
             <animated.div style={styles}>
               <ImageGallery
