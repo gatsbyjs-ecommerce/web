@@ -52,6 +52,12 @@ const Container = styled.div`
   }
 `;
 
+const LogoImg = styled.img`
+  height: 50px;
+  max-height: 2.25rem !important;
+  width: auto;
+`;
+
 const Header = () => {
   const { data } = useQuery(cartQuery);
   const cartItems = data ? data.cartItems || [] : [];
@@ -62,7 +68,7 @@ const Header = () => {
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <Link to="/" className="navbar-item">
-              6in
+              <LogoImg src="/images/6in-logo.png" alt="6in logo" />
             </Link>
 
             <a
@@ -81,17 +87,17 @@ const Header = () => {
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">
               <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/iphone" className="navbar-link">
+                <Link to="/apple" className="navbar-link">
                   iPhone
                 </Link>
                 <div className="navbar-dropdown">
-                  <Link to="/iphone-11-pro" className="navbar-item">
+                  <Link to="/apple/iphone-11" className="navbar-item">
                     iPhone 11
                   </Link>
-                  <Link to="/iphone-11-pro" className="navbar-item">
+                  <Link to="/apple/iphone-11-pro" className="navbar-item">
                     iPhone 11 Pro
                   </Link>
-                  <Link to="/iphone-11-pro-max" className="navbar-item">
+                  <Link to="/apple/iphone-11-pro-max" className="navbar-item">
                     iPhone 11 Pro Max
                   </Link>
                 </div>

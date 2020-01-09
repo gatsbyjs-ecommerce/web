@@ -28,36 +28,40 @@ const Image = styled(Img)`
   object-fit: cover;
 `;
 
-const ProductItem = ({ item, styles }) => (
-  <Container className="column is-one-quarter" style={styles}>
-    <div className="card">
-      <Link to={`/product/${item.slug.current}`}>
-        <div className="card-image">
-          {item.variant.featuredImage ? (
-            <Image fluid={item.variant.featuredImage.asset.fluid} />
-          ) : (
-            <img
-              src="https://bulma.io/images/placeholders/1280x960.png"
-              alt="Placeholder image"
-            />
-          )}
-        </div>
-      </Link>
-      <div className="card-content">
-        <div className="media">
-          <div className="media-content">
-            <p className="subtitle is-6">
-              <Link to={`/product/${item.slug.current}`}>{item.title}</Link>
-            </p>
-            <p className="title is-6">
-              {formatCurrency(item.variant.discountPrice)}
-            </p>
+const ProductItem = ({ item, styles }) => {
+  const variant = item.otherVariants[0];
+
+  return (
+    <Container className="column is-one-quarter" style={styles}>
+      <div className="card">
+        <Link to={`/product/${item.slug.current}`}>
+          <div className="card-image">
+            {variant && variant.featuredImage ? (
+              <Image fluid={variant.featuredImage.asset.fluid} />
+            ) : (
+              <img
+                src="https://bulma.io/images/placeholders/1280x960.png"
+                alt="Placeholder image"
+              />
+            )}
+          </div>
+        </Link>
+        <div className="card-content">
+          <div className="media">
+            <div className="media-content">
+              <p className="subtitle is-6">
+                <Link to={`/product/${item.slug.current}`}>{item.title}</Link>
+              </p>
+              <p className="title is-6">
+                {formatCurrency(variant.discountPrice)}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </Container>
-);
+    </Container>
+  );
+};
 
 ProductItem.propTypes = {
   styles: PropTypes.object.isRequired,

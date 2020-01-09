@@ -35,6 +35,41 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      allSanityVendor {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+      allSanityDevice {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+            vendor {
+              slug {
+                current
+              }
+            }
+          }
+        }
+      }
+      allSanityCategory {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
     }
   `);
   if (result.errors) {
@@ -44,11 +79,48 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const products = result.data.allSanityProduct.edges || [];
   const pages = result.data.allSanityPage.edges || [];
   const articles = result.data.allSanityArticle.edges || [];
+  const vendors = result.data.allSanityVendor.edges || [];
+  const devices = result.data.allSanityDevice.edges || [];
+  const categories = result.data.allSanityCategory.edges || [];
 
   products.forEach(({ node }) => {
     createPage({
       path: `product/${node.slug.current}`,
       component: path.resolve(`src/components/ProductView.js`),
+      // additional data can be passed via context
+      context: {
+        slug: node.slug.current,
+      },
+    });
+  });
+
+  vendors.forEach(({ node }) => {
+    createPage({
+      path: `${node.slug.current}`,
+      component: path.resolve(`src/components/VendorView.js`),
+      // additional data can be passed via context
+      context: {
+        slug: node.slug.current,
+      },
+    });
+  });
+
+  devices.forEach(({ node }) => {
+    createPage({
+      path: `${node.vendor.slug.current}/${node.slug.current}`,
+      component: path.resolve(`src/components/DeviceView.js`),
+      // additional data can be passed via context
+      context: {
+        slug: node.slug.current,
+        vendorSlug: node.vendor.slug.current,
+      },
+    });
+  });
+
+  categories.forEach(({ node }) => {
+    createPage({
+      path: `${node.slug.current}`,
+      component: path.resolve(`src/components/CategoryView.js`),
       // additional data can be passed via context
       context: {
         slug: node.slug.current,

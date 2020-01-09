@@ -33,7 +33,7 @@ export const query = graphql`
         current
       }
       _rawBody
-      variant {
+      otherVariants {
         color
         discountPrice
         price
@@ -66,7 +66,7 @@ export const query = graphql`
           slug {
             current
           }
-          variant {
+          otherVariants {
             color
             discountPrice
             price

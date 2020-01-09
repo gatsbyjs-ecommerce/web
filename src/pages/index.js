@@ -24,10 +24,10 @@ export const query = graphql`
           slug {
             current
           }
-          variant {
+          otherVariants {
             color
-            discountPrice
             price
+            discountPrice
             sku
             featuredImage {
               asset {

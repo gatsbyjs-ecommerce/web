@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { navigate } from 'gatsby';
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -13,10 +14,10 @@ const ItemContainer = styled.article`
   cursor: pointer;
 `;
 
-const FeaturedCategoriesItem = ({ title, subtitle, imgWidth }) => (
+const FeaturedCategoriesItem = ({ title, subtitle, link, imgWidth }) => (
   <ItemContainer
     className="tile is-child notification"
-    onClick={() => console.log('go to category page')}
+    onClick={() => navigate(link)}
   >
     <p className="title">{title}</p>
     <p className="subtitle">{subtitle}</p>
@@ -38,6 +39,7 @@ const FeaturedCategories = () => {
                 title="iPhone"
                 subtitle="Cases"
                 imgWidth="400px"
+                link="/cases"
               />
             </div>
             <div className="tile is-parent">
@@ -45,6 +47,7 @@ const FeaturedCategories = () => {
                 title="Apple Watch"
                 subtitle="Straps"
                 imgWidth="400px"
+                link="/straps"
               />
             </div>
           </div>
@@ -53,6 +56,7 @@ const FeaturedCategories = () => {
               title="Accessories"
               subtitle="Airpods Case"
               imgWidth="500px"
+              link="/apple/airpods"
             />
           </div>
         </div>
