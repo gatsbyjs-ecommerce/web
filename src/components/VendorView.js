@@ -28,6 +28,13 @@ export const vendorQuery = graphql`
               current
             }
           }
+          image {
+            asset {
+              fluid(maxWidth: 350) {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
         }
       }
     }

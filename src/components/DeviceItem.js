@@ -5,6 +5,8 @@ import { animated } from 'react-spring';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
+import DummyImage from './DummyImage';
+
 const Container = styled(animated.div)`
   .card {
     border: none;
@@ -15,9 +17,6 @@ const Container = styled(animated.div)`
   }
   .card-image {
     min-height: 241px;
-  }
-  .image.is-4by5 {
-    padding-top: 0;
   }
 `;
 
@@ -31,20 +30,17 @@ const DeviceItem = ({ item, styles }) => {
       <div className="card">
         <Link to={`/${item.vendor.slug.current}/${item.slug.current}`}>
           <div className="card-image">
-            {item.featuredImage ? (
-              <Image fluid={item.featuredImage.asset.fluid} />
+            {item.image ? (
+              <Image fluid={item.image.asset.fluid} />
             ) : (
-              <img
-                src="https://bulma.io/images/placeholders/1280x960.png"
-                alt="Placeholder image"
-              />
+              <DummyImage />
             )}
           </div>
         </Link>
         <div className="card-content">
           <div className="media">
             <div className="media-content">
-              <p className="subtitle is-6">
+              <p className="subtitle is-6 has-text-centered">
                 <Link to={`/product/${item.slug.current}`}>{item.title}</Link>
               </p>
             </div>

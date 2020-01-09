@@ -5,8 +5,8 @@ import { animated } from 'react-spring';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-import config from '../utils/config';
 import { formatCurrency } from '../utils/helpers';
+import DummyImage from './DummyImage';
 
 const Container = styled(animated.div)`
   .card {
@@ -39,10 +39,7 @@ const ProductItem = ({ item, styles }) => {
             {variant && variant.featuredImage ? (
               <Image fluid={variant.featuredImage.asset.fluid} />
             ) : (
-              <img
-                src="https://bulma.io/images/placeholders/1280x960.png"
-                alt="Placeholder image"
-              />
+              <DummyImage />
             )}
           </div>
         </Link>
