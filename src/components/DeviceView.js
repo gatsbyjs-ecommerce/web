@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import config from '../utils/config';
 import Seo from './Seo';
 import Layout from './Layout';
-import Heading from './Heading';
+import ProductsList from './ProductsList';
 
 export const deviceQuery = graphql`
   query DeviceByPath($slug: String!) {
@@ -25,6 +25,18 @@ export const deviceQuery = graphql`
           slug {
             current
           }
+          otherVariants {
+            color
+            price
+            discountPrice
+            featuredImage {
+              asset {
+                fluid(maxWidth: 700) {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -41,18 +53,13 @@ export default class DeviceView extends React.Component {
     return (
       <Layout>
         <Seo
-          title=""
+          title={device.title}
           description=""
           // url={`${config.siteUrl}/page/${page.slug}`}
         />
         <div className="section">
           <div className="container">
-            <Heading>Device: {device.title}</Heading>
-            <ul>
-              {products.map(({ node: product }) => (
-                <li key={product.id}>{product.title}</li>
-              ))}
-            </ul>
+            <ProductsList title={device.title} products={products} />
           </div>
         </div>
       </Layout>

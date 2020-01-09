@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import config from '../utils/config';
 import Seo from './Seo';
 import Layout from './Layout';
-import Heading from './Heading';
+import ProductsList from './ProductsList';
 
 export const categoryQuery = graphql`
   query CategoryByPath($slug: String!) {
@@ -16,7 +16,9 @@ export const categoryQuery = graphql`
       }
     }
     allSanityProduct(
-      filter: { category: { slug: { current: { eq: $slug } } } }
+      filter: {
+        categories: { elemMatch: { slug: { current: { eq: $slug } } } }
+      }
     ) {
       edges {
         node {
@@ -24,6 +26,18 @@ export const categoryQuery = graphql`
           title
           slug {
             current
+          }
+          otherVariants {
+            color
+            price
+            discountPrice
+            featuredImage {
+              asset {
+                fluid(maxWidth: 700) {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
           }
         }
       }
@@ -47,12 +61,7 @@ export default class CategoryView extends React.Component {
         />
         <div className="section">
           <div className="container">
-            <Heading>Category: {category.title}</Heading>
-            <ul>
-              {products.map(({ node: product }) => (
-                <li key={product.id}>{product.title}</li>
-              ))}
-            </ul>
+            <ProductsList title={category.title} products={products} />
           </div>
         </div>
       </Layout>

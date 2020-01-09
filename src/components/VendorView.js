@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import config from '../utils/config';
 import Seo from './Seo';
 import Layout from './Layout';
-import Heading from './Heading';
+import DevicesList from './DevicesList';
 
 export const vendorQuery = graphql`
   query VendorByPath($slug: String!) {
@@ -39,7 +39,7 @@ export default class VendorView extends React.Component {
     const { data } = this.props;
     const vendor = data.sanityVendor;
     const devices = data.allSanityDevice.edges;
-    console.log('data', data);
+    console.log('data', devices);
 
     return (
       <Layout>
@@ -50,12 +50,7 @@ export default class VendorView extends React.Component {
         />
         <div className="section">
           <div className="container">
-            <Heading>Vendor: {vendor.title}</Heading>
-            <ul>
-              {devices.map(({ node: device }) => (
-                <li key={device.id}>{device.title}</li>
-              ))}
-            </ul>
+            <DevicesList title={vendor.title} devices={devices} />
           </div>
         </div>
       </Layout>

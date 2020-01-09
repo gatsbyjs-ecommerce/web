@@ -28,7 +28,6 @@ export const query = graphql`
             color
             price
             discountPrice
-            sku
             featuredImage {
               asset {
                 fluid(maxWidth: 700) {

@@ -36,14 +36,14 @@ const Bottom = styled.div`
 `;
 
 const NavItems = [
-  { id: 2, name: 'Customer Care 24/7', url: '/contact' },
-  { id: 5, name: 'Delivery Information', url: '/page/delivery-information' },
-  { id: 6, name: 'Exchanges & Returns', url: '/page/return-policy' },
-  { id: 7, name: 'Gift Vouchers', url: '/coupons' },
-  { id: 1, name: 'About us', url: '/page/about' },
-  { id: 3, name: 'Terms and Conditions', url: '/page/terms-and-condition' },
-  { id: 4, name: 'Privacy Policy', url: '/page/privacy-policy' },
-  { id: 4, name: 'Blog', url: '/blog' },
+  { id: 1, name: 'Customer Care 24/7', url: '/contact' },
+  { id: 2, name: 'Delivery Information', url: '/page/delivery-information' },
+  { id: 3, name: 'Exchanges & Returns', url: '/page/return-policy' },
+  { id: 4, name: 'Gift Vouchers', url: '/coupons' },
+  { id: 5, name: 'About us', url: '/page/about' },
+  { id: 6, name: 'Terms and Conditions', url: '/page/terms-and-condition' },
+  { id: 7, name: 'Privacy Policy', url: '/page/privacy-policy' },
+  { id: 8, name: 'Blog', url: '/blog' },
 ];
 
 const Footer = ({ home }) => (

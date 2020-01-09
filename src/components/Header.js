@@ -104,29 +104,32 @@ const Header = () => {
               </div>
 
               <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/apple-watch" className="navbar-link">
+                <Link to="/apple/apple-watch" className="navbar-link">
                   Apple Watch
                 </Link>
                 <div className="navbar-dropdown">
-                  <Link to="/apple-watch-leather" className="navbar-item">
+                  <Link to="/leather-straps" className="navbar-item">
                     Leather Straps
                   </Link>
-                  <Link to="/apple-watch-steel" className="navbar-item">
+                  <Link to="/steel-straps" className="navbar-item">
                     Steel Straps
                   </Link>
-                  <Link to="/apple-watch-sports" className="navbar-item">
+                  <Link to="/sports-straps" className="navbar-item">
                     Sports Straps
                   </Link>
                 </div>
               </div>
 
               <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/accessories" className="navbar-link">
-                  Accessories
+                <Link to="/apple/airpods" className="navbar-link">
+                  Airpods
                 </Link>
                 <div className="navbar-dropdown">
-                  <Link to="/airpods-case" className="navbar-item">
-                    Airpods Case
+                  <Link to="/leather-airpods-case" className="navbar-item">
+                    Leather Case
+                  </Link>
+                  <Link to="/silicone-airpods-case" className="navbar-item">
+                    Silicone Case
                   </Link>
                 </div>
               </div>
