@@ -39,15 +39,11 @@ export default class VendorView extends React.Component {
     const { data } = this.props;
     const vendor = data.sanityVendor;
     const devices = data.allSanityDevice.edges;
-    console.log('data', devices);
+    // console.log('data', devices);
 
     return (
       <Layout>
-        <Seo
-          title=""
-          description=""
-          // url={`${config.siteUrl}/page/${page.slug}`}
-        />
+        <Seo title={vendor.title} description="" />
         <div className="section">
           <div className="container">
             <DevicesList title={vendor.title} devices={devices} />

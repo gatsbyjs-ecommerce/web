@@ -48,15 +48,11 @@ export default class DeviceView extends React.Component {
     const { data } = this.props;
     const device = data.sanityDevice;
     const products = data.allSanityProduct.edges;
-    console.log('data', data);
+    // console.log('data', data);
 
     return (
       <Layout>
-        <Seo
-          title={device.title}
-          description=""
-          // url={`${config.siteUrl}/page/${page.slug}`}
-        />
+        <Seo title={device.title} description="" />
         <div className="section">
           <div className="container">
             <ProductsList title={device.title} products={products} />

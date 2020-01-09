@@ -50,15 +50,11 @@ export default class CategoryView extends React.Component {
     const { data } = this.props;
     const category = data.sanityCategory;
     const products = data.allSanityProduct.edges;
-    console.log('data', data);
+    // console.log('data', data);
 
     return (
       <Layout>
-        <Seo
-          title=""
-          description=""
-          // url={`${config.siteUrl}/page/${page.slug}`}
-        />
+        <Seo title={category.title} description="" />
         <div className="section">
           <div className="container">
             <ProductsList title={category.title} products={products} />
