@@ -48,11 +48,7 @@ const HomePage = ({ data }) => {
 
   return (
     <Layout>
-      <Seo
-        title="Latest punjabi suits collection"
-        description={home.description}
-        url={config.siteUrl}
-      />
+      <Seo title="6in" description={home.description} url={config.siteUrl} />
       <HomeBanner data={home} />
       <FeaturedCategories />
       <ProductsList products={products} />
