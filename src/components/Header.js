@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
@@ -6,7 +6,7 @@ import { darken } from 'polished';
 import { useStoreState } from 'easy-peasy';
 
 const Container = styled.div`
-  padding: 1rem 0;
+  padding: 0 0;
   border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
 
   .cart-count {
@@ -23,6 +23,9 @@ const Container = styled.div`
 
   .navbar-menu {
     padding-left: 6rem;
+    @media only screen and (max-width: 1024px) {
+      padding-left: 1rem;
+    }
   }
 
   .navbar-item,
@@ -48,24 +51,42 @@ const LogoImg = styled.img`
   width: auto;
 `;
 
+const MobileCart = styled.div`
+  margin-left: auto;
+  margin-top: 5px;
+`;
+
 const Header = () => {
+  const [isActive, setIsActive] = useState(false);
   const cartItems = useStoreState(state => state.cart.items);
 
   return (
     <Container>
-      <div className="container">
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav
+        className="navbar is-fixed-top"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="container">
           <div className="navbar-brand">
             <Link to="/" className="navbar-item">
               <LogoImg src="/images/6in-logo.png" alt="6in logo" />
             </Link>
 
+            <MobileCart className="is-visible-mobile">
+              <Link to="/cart" className="navbar-item">
+                <i className="fas fa-shopping-cart" />
+                <div className="cart-count">{cartItems.length}</div>
+              </Link>
+            </MobileCart>
+
             <a
               role="button"
-              className="navbar-burger burger"
+              className={`navbar-burger burger ${isActive ? 'is-active' : ''}`}
               aria-label="menu"
               aria-expanded="false"
-              data-target="navbarBasicExample"
+              data-target="navbarMain"
+              onClick={() => setIsActive(!isActive)}
             >
               <span aria-hidden="true" />
               <span aria-hidden="true" />
@@ -73,7 +94,10 @@ const Header = () => {
             </a>
           </div>
 
-          <div id="navbarBasicExample" className="navbar-menu">
+          <div
+            id="navbarMain"
+            className={`navbar-menu ${isActive ? 'is-active' : ''}`}
+          >
             <div className="navbar-start">
               <div className="navbar-item has-dropdown is-hoverable">
                 <Link to="/apple" className="navbar-link">
@@ -138,7 +162,7 @@ const Header = () => {
               </div>
             </div>
 
-            <div className="navbar-end">
+            <div className="navbar-end is-hidden-mobile">
               <Link to="/account" className="navbar-item">
                 <i className="fas fa-user" />
               </Link>
@@ -148,8 +172,8 @@ const Header = () => {
               </Link>
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </Container>
   );
 };

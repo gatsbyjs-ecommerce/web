@@ -10,11 +10,7 @@ import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
 import ProductsList from './ProductsList';
 
-const Container = styled.div`
-  .section {
-    padding: 3rem 1rem;
-  }
-`;
+const Container = styled.div``;
 
 const ViewAllBtn = styled(Link)`
   padding-right: 2rem;

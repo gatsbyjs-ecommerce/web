@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.section`
-  width: 120px;
+  width: 160px;
   min-height: 26px;
   .level-item {
     margin-right: 0.3rem;
+    margin-left: 0.3rem;
+    float: left;
     a {
       padding: 0 !important;
     }
   }
   svg {
     color: ${props => (!props.inverted ? '#000' : '#fff')};
-    font-size: 1.6rem;
+    font-size: 1.9rem;
   }
 `;
 

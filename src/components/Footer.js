@@ -48,7 +48,7 @@ const NavItems = [
 
 const Footer = ({ home }) => (
   <Container>
-    <div className="section container is-hidden-mobile">
+    <div className="section container">
       <div className="columns is-multiline">
         <div className="column has-text-white">
           <Heading className="is-uppercase is-size-5 has-text-weight-semibold">

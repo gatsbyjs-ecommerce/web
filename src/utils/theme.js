@@ -54,6 +54,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 17px;
     line-height: 19px;
   }
+  .section {
+    padding: 3rem 1rem;
+  }
   .title {
     font-family: ${theme.primaryFontFamily};
   }
