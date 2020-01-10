@@ -119,6 +119,16 @@ const GlobalStyle = createGlobalStyle`
       margin-bottom: 1rem;
     }
   }
+  .help.is-danger {
+    color: #ff3860 !important;
+  }
+  input, textarea {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
 `;
 
 export default GlobalStyle;

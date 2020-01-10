@@ -196,7 +196,11 @@ const CartSteps = () => {
               </animated.div>
             )}
           </Spring>
-          <div className="column section is-hidden-tablet">
+          <div
+            className={`column section ${
+              activeStep === 2 ? 'is-hidden-mobile' : ''
+            } is-hidden-tablet`}
+          >
             <CartItems
               cartItems={cartItems}
               showCheckoutBtn={activeStep === 1}
