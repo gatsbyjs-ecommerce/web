@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Spring, animated } from 'react-spring';
 import randomstring from 'randomstring';
 import gql from 'graphql-tag';
-import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import { useStoreState } from 'easy-peasy';
 import { isEmpty } from 'lodash';
 
 import Heading from './Heading';
@@ -11,19 +12,6 @@ import CartItems from './CartItems';
 import CheckoutForm from './CheckoutForm';
 import PaymentForm from './PaymentForm';
 import PaymentConfirmed from './PaymentConfirmed';
-
-const cartQuery = gql`
-  query CartItems {
-    cartItems @client {
-      id
-      title
-      sku
-      quantity
-      price
-      image
-    }
-  }
-`;
 
 const createOrderMutation = gql`
   mutation createOrder($input: OrderInput!) {
@@ -48,14 +36,13 @@ const CartSteps = () => {
   const [userData, setUserData] = useState({});
   const [paymentData, setPaymentData] = useState({});
   const [orderData, setOrderData] = useState({});
+  const cartItems = useStoreState(state => state.cart.items);
   const [createOrder, { data: createOrderResult }] = useMutation(
     createOrderMutation,
   );
   const [verifyCard, { data: verifyCardResult }] = useMutation(
     verifyCardMutation,
   );
-  const { data } = useQuery(cartQuery);
-  const cartItems = data ? data.cartItems || [] : [];
   // console.log('data', data, verifyCardResult, createOrderResult);
 
   useEffect(() => {
@@ -109,6 +96,7 @@ const CartSteps = () => {
           from={{ opacity: 0 }}
           to={{
             opacity: activeStep !== 1 ? 1 : 0,
+            // eslint-disable-next-line prettier/prettier
           }}
         >
           {styles => (
@@ -121,17 +109,19 @@ const CartSteps = () => {
           <Spring
             native
             from={{ marginLeft: '25%' }}
+            // eslint-disable-next-line prettier/prettier
             to={{ marginLeft: activeStep === 1 ? '25%' : '0%' }}
           >
             {stylesProps => (
               <animated.div
                 style={stylesProps}
+                // eslint-disable-next-line prettier/prettier
                 className="column section is-half is-hidden-mobile"
               >
                 <CartItems
                   cartItems={cartItems}
                   showCheckoutBtn={activeStep === 1}
-                  handlePayment={data2 => {
+                  handlePayment={() => {
                     setActiveStep(2);
                   }}
                 />
@@ -142,7 +132,7 @@ const CartSteps = () => {
             <CartItems
               cartItems={cartItems}
               showCheckoutBtn={activeStep === 1}
-              handlePayment={data2 => {
+              handlePayment={() => {
                 setActiveStep(2);
               }}
             />

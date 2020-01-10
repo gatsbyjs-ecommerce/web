@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { isUndefined } from 'lodash';
 import { Spring, animated } from 'react-spring';
 import ImageGallery from 'react-image-gallery';
@@ -81,9 +80,5 @@ class ProductGallery extends React.Component {
     );
   }
 }
-
-ProductGallery.propTypes = {
-  product: PropTypes.object.isRequired,
-};
 
 export default ProductGallery;

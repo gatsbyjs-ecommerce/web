@@ -2,17 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import { darken } from 'polished';
-
-const cartQuery = gql`
-  query CartItems {
-    cartItems @client {
-      id
-    }
-  }
-`;
+import { useStoreState } from 'easy-peasy';
 
 const Container = styled.div`
   padding: 1rem 0;
@@ -59,8 +50,7 @@ const LogoImg = styled.img`
 `;
 
 const Header = () => {
-  const { data } = useQuery(cartQuery);
-  const cartItems = data ? data.cartItems || [] : [];
+  const cartItems = useStoreState(state => state.cart.items);
 
   return (
     <Container>

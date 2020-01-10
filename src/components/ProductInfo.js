@@ -4,9 +4,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { navigateTo } from 'gatsby';
-import { useQuery, useApolloClient } from '@apollo/react-hooks';
 import ReactMarkdown from 'react-markdown';
-import gql from 'graphql-tag';
+import { useStoreActions } from 'easy-peasy';
 import {
   Accordion,
   AccordionItem,
@@ -21,19 +20,9 @@ import {
 } from 'react-share';
 
 import config from '../utils/config';
-import { formatCurrency } from '../utils/helpers';
+import { formatCurrency, makeId } from '../utils/helpers';
 import { BlockContent } from './Content';
 import Heading from './Heading';
-
-// const cartQuery = graphql`
-//   query {
-//     cart @client {
-//       __typename
-//       items
-//       count
-//     }
-//   }
-// `;
 
 const Price = styled.div`
   color: ${config.primaryColor};
@@ -122,19 +111,9 @@ const VariantColor = styled.div`
     `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
 `;
 
-const cartQuery = gql`
-  query CartItems {
-    cartItems @client {
-      id
-    }
-  }
-`;
-
 const ProductInfo = ({ product, home, variant, setVariant }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const client = useApolloClient();
-  const { data } = useQuery(cartQuery);
-  const { cartItems } = data || {};
+  const addToCart = useStoreActions(actions => actions.cart.add);
   // console.log('product', product);
 
   useEffect(() => {
@@ -144,27 +123,23 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
   }, []);
 
   const metaUrl = `${config.siteUrl}/product/${product.slug.current}`;
-  const metaTitle = `Checkout ${product.title} at SejalSuits`;
+  const metaTitle = `Checkout ${product.title} at 6in`;
 
-  const addToCart = () => {
-    // console.log('cartItems', cartItems);
-    const items = cartItems || [];
-
+  const handleAddToCart = () => {
     const itemData = {
-      id: product._id,
-      sku: variant.sku,
+      itemId: makeId(5),
+      id: product.id,
       title: product.title,
-      price: variant.price,
+      sku: variant.sku,
+      price: variant.discountPrice,
       image: variant.featuredImage.asset.fluid.src,
+      color: variant.color.hex,
       quantity: 1,
-      __typename: 'CartItem',
     };
-    items.push(itemData);
-    client.writeData({ data: { cartItems: items } });
+    addToCart(itemData);
 
     setTimeout(() => navigateTo('/cart'), 600);
   };
-  // console.log('variantItem', product.otherVariants);
 
   return (
     <>
@@ -197,7 +172,7 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
             <BuyBtn
               className="product-info-btn button is-dark is-large is-radiusless is-uppercase"
               // eslint-disable-next-line prettier/prettier
-              onClick={() => addToCart()}
+              onClick={() => handleAddToCart()}
             >
               Add to cart
             </BuyBtn>

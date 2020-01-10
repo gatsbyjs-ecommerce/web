@@ -6,7 +6,6 @@ import { CachePersistor } from 'apollo-cache-persist';
 import fetch from 'isomorphic-fetch';
 
 import config from './config';
-import { resolvers, typeDefs } from './localState';
 
 const httpLink = createHttpLink({
   uri: config.debug ? config.graphQlUriDev : config.graphQlUri,
@@ -44,8 +43,6 @@ const authLink = setContext(async (_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,
-  typeDefs,
-  resolvers,
 });
 
 export default client;

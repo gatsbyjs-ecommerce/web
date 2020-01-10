@@ -8,6 +8,7 @@ module.exports = {
   siteUrl: 'http://6in.co/',
   graphQlUri: 'https://6in-api.now.sh/api',
   graphQlUriDev: 'https://6in-api.now.sh/api',
+  projectKey: '6in-co12',
 
   type: 'website',
   googleAnalytics: 'UA-1390187-43',

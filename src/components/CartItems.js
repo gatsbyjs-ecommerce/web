@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useApolloClient } from '@apollo/react-hooks';
+import { useStoreActions } from 'easy-peasy';
 
 import { formatCurrency } from '../utils/helpers';
 import CouponForm from './CouponForm';
@@ -32,17 +32,8 @@ const CartItems = ({ showCheckoutBtn, handlePayment, cartItems }) => {
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [couponCode, setCouponCode] = useState(null);
-  const client = useApolloClient();
+  const removeFromCart = useStoreActions(actions => actions.cart.remove);
   // console.log('cartItems', cartItems);
-
-  if (cartItems.length === 0) {
-    return <p className="has-text-centered	is-size-4">No items in your cart.</p>;
-  }
-
-  const handleRemoveItem = index => {
-    cartItems.splice(index, 1);
-    client.writeData({ data: { cartItems } });
-  };
 
   const handleApplyDiscount = ({ discountPercentage, code }) => {
     const discountNew = (discountPercentage / 100) * total;
@@ -62,15 +53,21 @@ const CartItems = ({ showCheckoutBtn, handlePayment, cartItems }) => {
     }
   };
 
-  // run everytime cart item updates
+  // run every time cart item updates
   useEffect(() => {
-    calculateTotal();
+    if (cartItems && cartItems.length > 0) {
+      calculateTotal();
+    }
   }, [cartItems]);
+
+  if (cartItems.length === 0) {
+    return <p className="has-text-centered	is-size-4">No items in your cart.</p>;
+  }
 
   return (
     <>
       {cartItems.map((item, index) => (
-        <Item className="media" key={index}>
+        <Item className="media" key={item.itemId}>
           {item.image && (
             <figure className="media-left">
               <div className="image is-128x128">
@@ -99,7 +96,7 @@ const CartItems = ({ showCheckoutBtn, handlePayment, cartItems }) => {
                 <span className="is-size-5 has-text-weight-bold has-text-grey-dark">
                   {formatCurrency(item.price)}
                 </span>
-                <a className="remove" onClick={() => handleRemoveItem(index)}>
+                <a className="remove" onClick={() => removeFromCart(index)}>
                   remove
                 </a>
               </p>
@@ -150,7 +147,8 @@ const CartItems = ({ showCheckoutBtn, handlePayment, cartItems }) => {
               discount,
               couponCode,
             });
-          }}>
+          }}
+        >
           Checkout
         </BuyBtn>
       )}
