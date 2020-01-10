@@ -30,6 +30,7 @@ export default class HTML extends React.Component {
             href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700&display=swap"
             rel="stylesheet"
           />
+          <script src="https://checkout.razorpay.com/v1/checkout.js" />
           {/* Add custom css or scripts here */}
 
           {this.props.headComponents}

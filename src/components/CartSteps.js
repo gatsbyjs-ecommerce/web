@@ -31,6 +31,7 @@ const verifyCardMutation = gql`
 `;
 
 const CartSteps = () => {
+  const country = 'india';
   const client = useApolloClient();
   const [activeStep, setActiveStep] = useState(1);
   const [userData, setUserData] = useState({});
@@ -87,6 +88,35 @@ const CartSteps = () => {
     client.writeData({ data: { cartItems: [] } });
   }, [createOrderResult]);
 
+  const handleRazorPay = () => {
+    const options = {
+      key: 'rzp_live_IUxBVbUJmPlqhT', // Enter the Key ID generated from the Dashboard
+      amount: '50000', // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
+      currency: 'INR',
+      name: 'Acme Corp',
+      description:
+        'A Wild Sheep Chase is the third novel by Japanese author  Haruki Murakami',
+      image: 'https://example.com/your_logo',
+      order_id: 'order_9A33XWu170gUtm', // This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+      handler(response) {
+        alert(response.razorpay_payment_id);
+      },
+      prefill: {
+        name: 'Gaurav Kumar',
+        email: 'gaurav.kumar@example.com',
+        contact: '9999999999',
+      },
+      notes: {
+        address: 'note value',
+      },
+      theme: {
+        color: '#F37254',
+      },
+    };
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
+  };
+
   return (
     <div className="section">
       <div className="container">
@@ -141,8 +171,14 @@ const CartSteps = () => {
             {activeStep === 2 && (
               <CheckoutForm
                 handlePayment={data2 => {
-                  setActiveStep(3);
-                  setUserData(data2);
+                  if (country === 'india') {
+                    // razorpay payment
+                    handleRazorPay();
+                  } else {
+                    // stripe payment
+                    setActiveStep(3);
+                    setUserData(data2);
+                  }
                 }}
               />
             )}
