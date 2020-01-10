@@ -39,6 +39,7 @@ class CheckoutForm extends React.Component {
       handleSubmit,
       handleChange,
       handleBlur,
+      loading,
     } = this.props;
 
     return (
@@ -46,7 +47,8 @@ class CheckoutForm extends React.Component {
         <Spring
           native
           from={{ opacity: 0 }}
-          to={{ opacity: isVisible ? 1 : 0 }}>
+          to={{ opacity: isVisible ? 1 : 0 }}
+        >
           {stylesProps => (
             <animated.div style={stylesProps}>
               <form onSubmit={handleSubmit}>
@@ -196,8 +198,11 @@ class CheckoutForm extends React.Component {
                 </div>
                 <BuyBtn
                   type="submit"
-                  disabled={isSubmitting}
-                  className="checkout-form-btn button is-dark is-large is-radiusless is-uppercase">
+                  disabled={isSubmitting || loading}
+                  className={`checkout-form-btn button is-dark is-large is-radiusless is-uppercase ${
+                    isSubmitting || loading ? 'is-loading' : ''
+                  }`}
+                >
                   <span className="icon">
                     <i className="far fa-credit-card" />
                   </span>

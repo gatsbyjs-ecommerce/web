@@ -25,6 +25,17 @@ const createOrderMutation = gql`
   }
 `;
 
+const updateOrderMutation = gql`
+  mutation updateOrder($input: OrderInput!) {
+    updateOrder(input: $input) {
+      id
+      orderId
+      paymentId
+      total
+    }
+  }
+`;
+
 const verifyCardMutation = gql`
   mutation verifyCard($input: VerifyCardInput!) {
     verifyCard(input: $input) {
@@ -35,6 +46,7 @@ const verifyCardMutation = gql`
 
 const CartSteps = () => {
   const country = 'india';
+  const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const [userData, setUserData] = useState({});
   const [paymentData, setPaymentData] = useState({});
@@ -44,6 +56,7 @@ const CartSteps = () => {
   const [createOrder, { data: createOrderResult }] = useMutation(
     createOrderMutation,
   );
+  const [updateOrder] = useMutation(updateOrderMutation);
   const [verifyCard, { data: verifyCardResult }] = useMutation(
     verifyCardMutation,
   );
@@ -103,7 +116,8 @@ const CartSteps = () => {
         order_id: createOrderResult.createOrder.paymentId, // This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
         handler(response) {
           console.log('razorpay response', response);
-          // TODO: do mutation to update payment ID and payment status to success
+          // do mutation to update payment ID and payment status to success
+          updateOrder({ variables: { status: 'paid' } });
           setOrderData(createOrderResult.createOrder);
           setActiveStep(4);
           emptyCart();
@@ -122,6 +136,7 @@ const CartSteps = () => {
       };
       const rzp1 = new Razorpay(options);
       rzp1.open();
+      setLoading(false);
     } else {
       setOrderData(createOrderResult.createOrder);
       setActiveStep(4);
@@ -192,7 +207,9 @@ const CartSteps = () => {
           <div className="column section">
             {activeStep === 2 && (
               <CheckoutForm
+                loading={loading}
                 handlePayment={data2 => {
+                  setLoading(true);
                   if (country === 'india') {
                     // razorpay payment
                     setUserData(data2);
