@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { isEmpty } from 'lodash';
+// import ReactGA from 'react-ga';
 
 import Heading from './Heading';
 import CheckoutProgress from './CheckoutProgress';
@@ -85,6 +86,23 @@ const CartSteps = () => {
     });
   };
 
+  const finishOrder = () => {
+    // ReactGA.plugin.execute('ecommerce', 'addTransaction', {
+    //   id: createOrderResult.createOrder.orderId,
+    //   name: 'test checkout', // Product name. Required.
+    //   sku: 'DD23444', // SKU/code.
+    //   category: 'Party Toys', // Category or variation.
+    //   price: '11.99', // Unit price.
+    //   quantity: '1', // Quantity.
+    // });
+    // ReactGA.plugin.execute('ecommerce', 'send');
+    // ReactGA.plugin.execute('ecommerce', 'clear');
+
+    setOrderData(createOrderResult.createOrder);
+    setActiveStep(4);
+    emptyCart();
+  };
+
   useEffect(() => {
     // make verifyCard mutation to generate token
     if (!isEmpty(paymentData)) {
@@ -119,9 +137,7 @@ const CartSteps = () => {
           console.log('razorpay response', response);
           // do mutation to update payment ID and payment status to success
           updateOrder({ variables: { status: 'paid' } });
-          setOrderData(createOrderResult.createOrder);
-          setActiveStep(4);
-          emptyCart();
+          finishOrder();
         },
         prefill: {
           name: userData.fullName,
@@ -139,9 +155,7 @@ const CartSteps = () => {
       rzp1.open();
       setLoading(false);
     } else {
-      setOrderData(createOrderResult.createOrder);
-      setActiveStep(4);
-      emptyCart();
+      finishOrder();
     }
   }, [createOrderResult]);
 

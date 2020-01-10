@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { darken } from 'polished';
 import { useStoreState } from 'easy-peasy';
+import ReactGA from 'react-ga';
 
 const Container = styled.div`
   padding: 0 0;
@@ -97,7 +98,13 @@ const Header = () => {
               aria-label="menu"
               aria-expanded="false"
               data-target="navbarMain"
-              onClick={() => setIsActive(!isActive)}
+              onClick={() => {
+                setIsActive(!isActive);
+                ReactGA.event({
+                  category: 'User',
+                  action: 'Toggle Mobile Menu',
+                });
+              }}
             >
               <span aria-hidden="true" />
               <span aria-hidden="true" />

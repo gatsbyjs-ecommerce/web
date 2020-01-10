@@ -18,22 +18,8 @@ module.exports = {
         token: process.env.SANITY_TOKEN,
       },
     },
-    // {
-    //   resolve: `gatsby-source-contentful`,
-    //   options: {
-    //     spaceId: `o6uhtcakujse`,
-    //     accessToken: `42627fbeb9475a7867204b28243ff40aa2aec93995ecac371eea9957dda734b2`,
-    //     downloadLocal: false,
-    //   },
-    // },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: config.googleAnalytics,
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

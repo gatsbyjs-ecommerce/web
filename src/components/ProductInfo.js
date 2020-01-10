@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { navigateTo } from 'gatsby';
 import ReactMarkdown from 'react-markdown';
 import { useStoreActions } from 'easy-peasy';
+import ReactGA from 'react-ga';
 import {
   Accordion,
   AccordionItem,
@@ -128,6 +129,15 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
 
   const metaUrl = `${config.siteUrl}/product/${product.slug.current}`;
   const metaTitle = `Checkout ${product.title} at 6in`;
+
+  ReactGA.plugin.execute('ecommerce', 'addItem', {
+    id: product._id,
+    title: product.title,
+    sku: variant.sku || '-',
+    price: variant.discountPrice,
+    // category: 'Cases',
+    quantity: '1',
+  });
 
   const handleAddToCart = () => {
     const itemData = {
