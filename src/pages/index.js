@@ -41,18 +41,39 @@ export const query = graphql`
         }
       }
     }
+    allSanityCategory(
+      filter: { slug: { current: { in: ["straps", "cases", "airpods-case"] } } }
+    ) {
+      edges {
+        node {
+          id
+          title
+          slug {
+            current
+          }
+          image {
+            asset {
+              fluid(maxWidth: 500) {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
 const HomePage = ({ data }) => {
   const home = data.sanitySiteSettings;
   const products = data.allSanityProduct.edges;
+  const categories = data.allSanityCategory.edges;
 
   return (
     <Layout>
       <Seo title="6in" description={home.description} url={config.siteUrl} />
       <HomeBanner data={home} />
-      <FeaturedCategories />
+      <FeaturedCategories categories={categories} />
       <ProductsList products={products} />
       <HomeAbout data={home} />
     </Layout>

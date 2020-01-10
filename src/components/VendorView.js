@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import config from '../utils/config';
 import Seo from './Seo';
 import Layout from './Layout';
 import DevicesList from './DevicesList';

@@ -56,7 +56,7 @@ const CartSteps = () => {
   );
   const { data } = useQuery(cartQuery);
   const cartItems = data ? data.cartItems || [] : [];
-  console.log('data', data, verifyCardResult, createOrderResult);
+  // console.log('data', data, verifyCardResult, createOrderResult);
 
   useEffect(() => {
     // make verifyCard mutation to generate token
@@ -109,7 +109,8 @@ const CartSteps = () => {
           from={{ opacity: 0 }}
           to={{
             opacity: activeStep !== 1 ? 1 : 0,
-          }}>
+          }}
+        >
           {styles => (
             <animated.div style={styles}>
               <CheckoutProgress activeStep={activeStep} />
@@ -120,11 +121,13 @@ const CartSteps = () => {
           <Spring
             native
             from={{ marginLeft: '25%' }}
-            to={{ marginLeft: activeStep === 1 ? '25%' : '0%' }}>
+            to={{ marginLeft: activeStep === 1 ? '25%' : '0%' }}
+          >
             {stylesProps => (
               <animated.div
                 style={stylesProps}
-                className="column section is-half is-hidden-mobile">
+                className="column section is-half is-hidden-mobile"
+              >
                 <CartItems
                   cartItems={cartItems}
                   showCheckoutBtn={activeStep === 1}

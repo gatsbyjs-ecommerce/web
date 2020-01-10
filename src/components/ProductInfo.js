@@ -163,7 +163,7 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
 
     setTimeout(() => navigateTo('/cart'), 600);
   };
-  console.log('variantItem', product.otherVariants);
+  // console.log('variantItem', product.otherVariants);
 
   return (
     <>
