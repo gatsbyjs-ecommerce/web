@@ -9,6 +9,13 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#E38D60`,
+        showSpinner: false,
+      },
+    },
+    {
       resolve: 'gatsby-source-sanity',
       options: {
         projectId: '1noazxoy',
@@ -32,6 +39,7 @@ module.exports = {
         icon: `./static/images/6in-logo.png`,
       },
     },
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-offline`,
   ],

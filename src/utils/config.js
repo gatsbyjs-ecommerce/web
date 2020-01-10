@@ -13,7 +13,7 @@ module.exports = {
   type: 'website',
   googleAnalytics: 'UA-1390187-43',
   backgroundColor: '#e0e0e0',
-  themeColor: '#c62828',
+  themeColor: '#E38D60',
   // razorPayKey: 'rzp_live_IUxBVbUJmPlqhT',
   razorPayKey: 'rzp_test_utnkFIuYF4POGv',
 
