@@ -73,7 +73,7 @@ const Header = () => {
               <LogoImg src="/images/6in-logo.png" alt="6in logo" />
             </Link>
 
-            <MobileCart className="is-visible-mobile">
+            <MobileCart className="is-hidden-tablet">
               <Link to="/cart" className="navbar-item">
                 <i className="fas fa-shopping-cart" />
                 <div className="cart-count">{cartItems.length}</div>
