@@ -8,6 +8,9 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 const Container = styled.div`
   min-height: 700px;
+  @media only screen and (max-width: 1024px) {
+    min-height: 400px;
+  }
   .image-gallery-thumbnails-wrapper {
     margin-top: 10px;
   }

@@ -59,10 +59,10 @@ export default class CategoryView extends React.Component {
     return (
       <Layout>
         <Seo title={category.title} description="" />
-        <div className="section">
-          <div className="container">
+        <div className="container">
+          <section className="section">
             <ProductsList title={category.title} products={products} />
-          </div>
+          </section>
         </div>
       </Layout>
     );

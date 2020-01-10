@@ -32,14 +32,14 @@ export default class ArticleView extends React.Component {
           description=""
           url={`${config.siteUrl}/article/${page.slug}`}
         />
-        <div className="section">
+        <section className="section">
           <div className="container">
             <Heading>{page.title}</Heading>
             <div className="markdown-container">
               <ReactMarkdown source={page.description} />
             </div>
           </div>
-        </div>
+        </section>
       </Layout>
     );
   }

@@ -53,11 +53,7 @@ export default class VendorView extends React.Component {
     return (
       <Layout>
         <Seo title={vendor.title} description="" />
-        <div className="section">
-          <div className="container">
-            <DevicesList title={vendor.title} devices={devices} />
-          </div>
-        </div>
+        <DevicesList title={vendor.title} devices={devices} />
       </Layout>
     );
   }

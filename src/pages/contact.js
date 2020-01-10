@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import SocialIcons from '../components/SocialIcons';
+import Heading from '../components/Heading';
 
 export const query = graphql`
   query ContactQuery {
@@ -20,10 +21,7 @@ export const query = graphql`
   }
 `;
 
-const Section = styled.div`
-  .container {
-    margin-top: 4rem;
-  }
+const Section = styled.section`
   p {
     margin-bottom: 1rem;
   }
@@ -48,7 +46,7 @@ const Contact = ({ data }) => {
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-two-fifths">
-              <h2 className="title is-1 has-text-weight-bold">Contact Us</h2>
+              <Heading>Contact Us</Heading>
               <p>
                 We’re as accessible as your good neighbour. Feel free
                 <br />

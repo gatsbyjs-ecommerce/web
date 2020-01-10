@@ -20,14 +20,14 @@ import {
 } from 'react-share';
 
 import config from '../utils/config';
+import { theme } from '../utils/theme';
 import { formatCurrency, makeId } from '../utils/helpers';
 import { BlockContent } from './Content';
 import Heading from './Heading';
 
 const Price = styled.div`
-  color: ${config.primaryColor};
+  color: ${theme.primaryColor};
   font-size: 1.5rem;
-  margin-top: -2rem;
   span {
     color: #4a4a4a;
     font-size: 1rem;

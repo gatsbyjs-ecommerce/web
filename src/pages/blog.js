@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import NewsItem from '../components/NewsItem';
+import Heading from '../components/Heading';
 
 export const pageQuery = graphql`
   query blog {
@@ -25,8 +26,7 @@ export const pageQuery = graphql`
 `;
 
 const Container = styled.div`
-  margin-top: 4rem;
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
 `;
 
 const Blog = ({ data }) => {
@@ -37,9 +37,7 @@ const Blog = ({ data }) => {
       <Seo title="News & Updates" />
       <section className="section">
         <Container className="container">
-          <h2 className="title is-2 has-text-centered has-text-weight-bold">
-            News & Updates
-          </h2>
+          <Heading>News & Updates</Heading>
           <div className="columns is-centered">
             <div className="column is-four-fifths">
               {posts.map(({ node: post }) => (

@@ -156,7 +156,7 @@ const CartSteps = () => {
   }, [userData]);
 
   return (
-    <div className="section">
+    <section className="section">
       <div className="container">
         <Heading>Cart</Heading>
         <Spring
@@ -233,7 +233,7 @@ const CartSteps = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

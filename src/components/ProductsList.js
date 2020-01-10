@@ -6,7 +6,7 @@ import { Trail } from 'react-spring';
 import ProductItem from './ProductItem';
 import Heading from './Heading';
 
-const Container = styled.section`
+const Container = styled.div`
   position: relative;
 `;
 
@@ -14,7 +14,7 @@ class ProductsList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { isOpen: false, activeCategory: null };
+    this.state = { isOpen: false };
   }
 
   componentDidMount() {
@@ -23,28 +23,28 @@ class ProductsList extends React.Component {
     }, 200);
   }
 
-  toggleCategory = category => this.setState({ activeCategory: category });
-
   render() {
     const { title, products } = this.props;
-    const { isOpen, activeCategory } = this.state;
+    const { isOpen } = this.state;
     const keys = products.map(item => item.node.id);
 
     return (
       <Container className="container">
-        <Heading>{title}</Heading>
-        <div className="columns is-multiline">
-          <Trail
-            native
-            from={{ opacity: 0 }}
-            to={{ opacity: isOpen ? 1 : 0.25 }}
-            keys={keys}
-          >
-            {products.map(({ node }) => styles => (
-              <ProductItem key={node.id} item={node} styles={styles} />
-            ))}
-          </Trail>
-        </div>
+        <section className="section">
+          <Heading>{title}</Heading>
+          <div className="columns is-multiline">
+            <Trail
+              native
+              from={{ opacity: 0 }}
+              to={{ opacity: isOpen ? 1 : 0.25 }}
+              keys={keys}
+            >
+              {products.map(({ node }) => styles => (
+                <ProductItem key={node.id} item={node} styles={styles} />
+              ))}
+            </Trail>
+          </div>
+        </section>
       </Container>
     );
   }

@@ -33,10 +33,10 @@ export default class Coupons extends React.Component {
       <Layout>
         <Seo
           title="Coupons"
-          description="Get a best detals"
+          description="Get a best deals"
           url={`${config.siteUrl}/coupons`}
         />
-        <div className="section">
+        <section className="section">
           <div className="container">
             <Heading>Coupons</Heading>
             <div className="columns is-multiline">
@@ -47,7 +47,7 @@ export default class Coupons extends React.Component {
               ))}
             </div>
           </div>
-        </div>
+        </section>
       </Layout>
     );
   }

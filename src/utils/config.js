@@ -18,8 +18,4 @@ module.exports = {
   razorPayKey: 'rzp_test_utnkFIuYF4POGv',
 
   currency: '₹',
-  stripePublishableKey:
-    process.env.NODE_ENV === 'development'
-      ? 'pk_test_P0DEB2otulfya51U9lIkLXAn'
-      : 'pk_live_eMN5tHGymDNn3DOZH8MX5ziD',
 };

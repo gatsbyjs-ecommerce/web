@@ -6,7 +6,7 @@ import { Trail } from 'react-spring';
 import DeviceItem from './DeviceItem';
 import Heading from './Heading';
 
-const Container = styled.section`
+const Container = styled.div`
   position: relative;
 `;
 
@@ -29,21 +29,23 @@ class DevicesList extends React.Component {
     const keys = devices.map(item => item.node.id);
 
     return (
-      <Container className="container">
-        <Heading>{title}</Heading>
-        <div className="columns is-multiline">
-          <Trail
-            native
-            from={{ opacity: 0 }}
-            to={{ opacity: isOpen ? 1 : 0.25 }}
-            keys={keys}
-          >
-            {devices.map(({ node }) => styles => (
-              <DeviceItem key={node.id} item={node} styles={styles} />
-            ))}
-          </Trail>
-        </div>
-      </Container>
+      <section className="section">
+        <Container className="container">
+          <Heading>{title}</Heading>
+          <div className="columns is-multiline">
+            <Trail
+              native
+              from={{ opacity: 0 }}
+              to={{ opacity: isOpen ? 1 : 0.25 }}
+              keys={keys}
+            >
+              {devices.map(({ node }) => styles => (
+                <DeviceItem key={node.id} item={node} styles={styles} />
+              ))}
+            </Trail>
+          </div>
+        </Container>
+      </section>
     );
   }
 }

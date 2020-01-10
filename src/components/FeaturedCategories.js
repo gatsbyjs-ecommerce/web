@@ -7,10 +7,14 @@ import Img from 'gatsby-image';
 import DummyImage from './DummyImage';
 
 const Container = styled.div`
-  margin-top: 4rem;
-  margin-bottom: 6rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
   p {
     color: ${props => props.theme.textColorDark} !important;
+  }
+  @media only screen and (max-width: 1024px) {
+    margin-top: 0;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -47,40 +51,42 @@ const FeaturedCategories = ({ categories }) => {
   );
 
   return (
-    <Container className="container">
-      <div className="tile is-ancestor">
-        <div className="tile is-vertical is-12">
-          <div className="tile">
-            <div className="tile is-parent is-vertical">
-              <FeaturedCategoriesItem
-                title="iPhone"
-                subtitle={cases.node.title}
-                imgWidth="400px"
-                link="/cases"
-                image={cases.node.image}
-              />
+    <Container className="container is-hidden-mobile">
+      <section className="section">
+        <div className="tile is-ancestor">
+          <div className="tile is-vertical is-12">
+            <div className="tile">
+              <div className="tile is-parent is-vertical">
+                <FeaturedCategoriesItem
+                  title="iPhone"
+                  subtitle={cases.node.title}
+                  imgWidth="400px"
+                  link="/cases"
+                  image={cases.node.image}
+                />
+              </div>
+              <div className="tile is-parent">
+                <FeaturedCategoriesItem
+                  title="Apple Watch"
+                  subtitle={straps.node.title}
+                  imgWidth="400px"
+                  link="/straps"
+                  image={straps.node.image}
+                />
+              </div>
             </div>
             <div className="tile is-parent">
               <FeaturedCategoriesItem
-                title="Apple Watch"
-                subtitle={straps.node.title}
-                imgWidth="400px"
-                link="/straps"
-                image={straps.node.image}
+                title="Accessories"
+                subtitle={airpodsCase.node.title}
+                imgWidth="500px"
+                link="/apple/airpods"
+                image={airpodsCase.node.image}
               />
             </div>
           </div>
-          <div className="tile is-parent">
-            <FeaturedCategoriesItem
-              title="Accessories"
-              subtitle={airpodsCase.node.title}
-              imgWidth="500px"
-              link="/apple/airpods"
-              image={airpodsCase.node.image}
-            />
-          </div>
         </div>
-      </div>
+      </section>
     </Container>
   );
 };

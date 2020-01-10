@@ -59,11 +59,7 @@ export default class DeviceView extends React.Component {
     return (
       <Layout>
         <Seo title={device.title} description="" />
-        <div className="section">
-          <div className="container">
-            <ProductsList title={device.title} products={products} />
-          </div>
-        </div>
+        <ProductsList title={device.title} products={products} />
       </Layout>
     );
   }

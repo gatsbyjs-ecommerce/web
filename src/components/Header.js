@@ -8,7 +8,6 @@ import { useStoreState } from 'easy-peasy';
 const Container = styled.div`
   padding: 1rem 0;
   border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
-  margin-bottom: 2rem;
 
   .cart-count {
     font-size: 0.8rem;
@@ -125,9 +124,9 @@ const Header = () => {
               </div>
 
               <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/help" className="navbar-link">
+                <a href="#" className="navbar-link">
                   Help
-                </Link>
+                </a>
                 <div className="navbar-dropdown">
                   <Link to="/contact" className="navbar-item">
                     Contact

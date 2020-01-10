@@ -11,9 +11,8 @@ import ProductInfo from './ProductInfo';
 import ProductsList from './ProductsList';
 
 const Container = styled.div`
-  &&& {
-    margin-top: 3rem;
-    margin-bottom: 5rem;
+  .section {
+    padding: 3rem 1rem;
   }
 `;
 
@@ -125,19 +124,21 @@ const ProductView = ({ data }) => {
         isProduct
       />
       <div className="container">
-        <Container className="columns">
-          <div className="column is-two-fifths">
-            <ProductGallery variant={variant} />
-          </div>
-          <div className="column section">
-            <ProductInfo
-              home={home}
-              product={product}
-              variant={variant}
-              setVariant={setVariant}
-            />
-          </div>
-        </Container>
+        <section className="section">
+          <Container className="columns">
+            <div className="column is-two-fifths">
+              <ProductGallery variant={variant} />
+            </div>
+            <div className="column section">
+              <ProductInfo
+                home={home}
+                product={product}
+                variant={variant}
+                setVariant={setVariant}
+              />
+            </div>
+          </Container>
+        </section>
         <ProductsList title="We think you'll" products={products} />
         <div className="has-text-centered	">
           <ViewAllBtn to="/shop" className="button is-outlined is-medium">
