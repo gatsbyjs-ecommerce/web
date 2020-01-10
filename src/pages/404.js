@@ -12,36 +12,41 @@ const Container = styled.div`
   text-align: center;
 `;
 
-// export const notFoundQuery = graphql`
-//   query notFoundQuery {
-//     allContentfulProduct(
-//       filter: { status: { eq: "active" } }
-//       limit: 6
-//       sort: { fields: [createdAt], order: DESC }
-//     ) {
-//       edges {
-//         node {
-//           id
-//           title
-//           slug
-//           color
-//           originalPrice
-//           discountPrice
-//           featuredImage {
-//             title
-//             sizes(maxWidth: 550) {
-//               ...GatsbyContentfulSizes
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
+export const notFoundQuery = graphql`
+  query notFoundQuery {
+    allSanityProduct(
+      filter: { status: { eq: "active" }, isFeatured: { eq: true } }
+      sort: { fields: [listingOrder], order: ASC }
+    ) {
+      edges {
+        node {
+          id
+          title
+          slug {
+            current
+          }
+          otherVariants {
+            color {
+              hex
+            }
+            price
+            discountPrice
+            featuredImage {
+              asset {
+                fluid(maxWidth: 350) {
+                  ...GatsbySanityImageFluid
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 const NotFoundPage = ({ data }) => {
-  // const { allContentfulProduct: products } = data;
-  const products = [];
+  const products = data.allSanityProduct.edges;
 
   return (
     <Layout>
@@ -51,7 +56,7 @@ const NotFoundPage = ({ data }) => {
           <h1 className="title">NOT FOUND</h1>
           <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
           <br />
-          <ProductsList title="We think you'll" products={products.edges} />
+          <ProductsList title="We think you'll" products={products} />
         </Container>
       </section>
     </Layout>

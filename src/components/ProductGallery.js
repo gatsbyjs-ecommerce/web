@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 const Container = styled.div`
+  min-height: 700px;
   .image-gallery-thumbnails-wrapper {
     margin-top: 10px;
   }

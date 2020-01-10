@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { navigateTo } from 'gatsby';
 import { useQuery, useApolloClient } from '@apollo/react-hooks';
+import ReactMarkdown from 'react-markdown';
 import gql from 'graphql-tag';
 import {
   Accordion,
@@ -209,12 +210,11 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
                   {product._rawBody && (
                     <BlockContent blocks={product._rawBody.en || []} />
                   )}
-                  {/* <HTMLContent
-                    content={product.shortDetails.childMarkdownRemark.html}
-                  /> */}
                   <p>Made in India</p>
-                  <p>All prices include sales taxes and free UK delivery.</p>
-                  <ProductCode>Product Code: {variant.sku}</ProductCode>
+                  <p>All prices include sales taxes.</p>
+                  {variant.sku && (
+                    <ProductCode>Product Code: {variant.sku}</ProductCode>
+                  )}
                 </AccordionItemBody>
               </AccordionItem>
               <AccordionItem>
@@ -222,9 +222,9 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
                   <h3>Delivery & Returns</h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                  {home.productDeliveryInfo}
+                  <ReactMarkdown source={home.productDeliveryInfo} />
                   <br />
-                  {home.productShippingReturns}
+                  <ReactMarkdown source={home.productShippingReturns} />
                 </AccordionItemBody>
               </AccordionItem>
             </AccordionStyled>

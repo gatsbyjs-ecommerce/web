@@ -13,6 +13,7 @@ import ProductsList from './ProductsList';
 const Container = styled.div`
   &&& {
     margin-top: 3rem;
+    margin-bottom: 5rem;
   }
 `;
 
@@ -138,7 +139,7 @@ const ProductView = ({ data }) => {
         </Container>
         <ProductsList title="We think you'll" products={products} />
         <div className="has-text-centered	">
-          <ViewAllBtn to="/" className="button is-outlined is-medium">
+          <ViewAllBtn to="/shop" className="button is-outlined is-medium">
             View all
           </ViewAllBtn>
         </div>
