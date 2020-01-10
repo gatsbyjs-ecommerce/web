@@ -3,9 +3,9 @@ module.exports = {
 
   siteName: '6in.co',
   author: 'Parminder Klair',
-  description:
-    'A ecommerce system using ReactJs, bundled with awesome GatsbyJs.',
-  siteUrl: 'http://6in.co/',
+  description: 'Premium Phone Products',
+  logo: 'https://www.6in.co/images/6in-logo.png',
+  siteUrl: 'https://www.6in.co/',
   graphQlUri: 'https://6in-api.now.sh/api',
   graphQlUriDev: 'http://localhost:4000/api',
   projectKey: '6in-co12',
@@ -14,6 +14,8 @@ module.exports = {
   googleAnalytics: 'UA-1390187-43',
   backgroundColor: '#e0e0e0',
   themeColor: '#c62828',
+  // razorPayKey: 'rzp_live_IUxBVbUJmPlqhT',
+  razorPayKey: 'rzp_test_utnkFIuYF4POGv',
 
   currency: '₹',
   stripePublishableKey:

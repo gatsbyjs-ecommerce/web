@@ -13,6 +13,7 @@ import CheckoutForm from './CheckoutForm';
 import PaymentForm from './PaymentForm';
 import PaymentConfirmed from './PaymentConfirmed';
 import { theme } from '../utils/theme';
+import config from '../utils/config';
 
 const createOrderMutation = gql`
   mutation createOrder($input: OrderInput!, $gateway: String) {
@@ -107,12 +108,12 @@ const CartSteps = () => {
     if (country === 'india') {
       // use razor pay
       const options = {
-        key: 'rzp_test_utnkFIuYF4POGv', // Enter the Key ID generated from the Dashboard
+        key: config.razorPayKey, // Enter the Key ID generated from the Dashboard
         amount: `${createOrderResult.createOrder.total}00`,
         currency: 'INR',
-        name: '6in',
-        description: 'Phone accessories',
-        // image: 'https://example.com/your_logo',
+        name: config.siteName,
+        description: config.description,
+        image: config.logo,
         order_id: createOrderResult.createOrder.paymentId, // This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
         handler(response) {
           console.log('razorpay response', response);
