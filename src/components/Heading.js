@@ -11,17 +11,26 @@ const Line = styled.div`
   margin: 0.6rem auto 3rem auto;
 `;
 
-const Heading = ({ children }) => (
+const Heading = ({ children, centered }) => (
   <>
-    <h4 className="is-size-4 is-uppercase has-text-weight-semibold">
+    <h4
+      className={`is-size-4 is-uppercase has-text-weight-semibold ${
+        centered ? 'has-text-centered' : ''
+      }`}
+    >
       {children}
     </h4>
     <Line />
   </>
 );
 
+Heading.defaultProps = {
+  centered: false,
+};
+
 Heading.propTypes = {
   children: PropTypes.string.isRequired,
+  centered: PropTypes.bool,
 };
 
 export default Heading;

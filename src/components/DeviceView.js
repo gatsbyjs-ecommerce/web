@@ -26,7 +26,9 @@ export const deviceQuery = graphql`
             current
           }
           otherVariants {
-            color
+            color {
+              hex
+            }
             price
             discountPrice
             featuredImage {

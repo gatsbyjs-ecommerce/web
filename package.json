@@ -50,7 +50,7 @@
     "react-accessible-accordion": "^2.4.2",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
-    "react-image-gallery": "^0.9.1",
+    "react-image-gallery": "^1.0.3",
     "react-share": "^3.0.1",
     "react-spring": "^5.3.8",
     "styled-components": "^4.3.2",

@@ -5,6 +5,8 @@ import { Spring, animated } from 'react-spring';
 import ImageGallery from 'react-image-gallery';
 import styled from 'styled-components';
 
+import 'react-image-gallery/styles/css/image-gallery.css';
+
 const Container = styled.div`
   .image-gallery-thumbnails-wrapper {
     margin-top: 10px;
@@ -34,13 +36,11 @@ class ProductGallery extends React.Component {
 
   render() {
     const { isVisible } = this.state;
-    const { product } = this.props;
+    const { variant } = this.props;
 
     const isMobile = !isUndefined(global.window)
       ? global.window.innerWidth < 768
       : false;
-
-    const variant = product.otherVariants[0];
 
     // console.log('images', product.variant.images);
     const images = variant.images

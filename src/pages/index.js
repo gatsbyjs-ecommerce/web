@@ -19,13 +19,15 @@ export const query = graphql`
     allSanityProduct {
       edges {
         node {
-          _id
+          id
           title
           slug {
             current
           }
           otherVariants {
-            color
+            color {
+              hex
+            }
             price
             discountPrice
             featuredImage {

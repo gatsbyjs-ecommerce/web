@@ -100,6 +100,27 @@ const ShareContainer = styled.div`
   }
 `;
 
+const Variants = styled.div`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 1rem;
+`;
+
+const VariantColor = styled.div`
+  background-color: ${props => props.color};
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin: 0 5px;
+  float: left;
+  cursor: pointer;
+  box-shadow: inset 0 0 5px #848484;
+  border: ${props =>
+    `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
+`;
+
 const cartQuery = gql`
   query CartItems {
     cartItems @client {
@@ -108,12 +129,11 @@ const cartQuery = gql`
   }
 `;
 
-const ProductInfo = ({ product, home }) => {
+const ProductInfo = ({ product, home, variant, setVariant }) => {
   const [isVisible, setIsVisible] = useState(false);
   const client = useApolloClient();
   const { data } = useQuery(cartQuery);
   const { cartItems } = data || {};
-  const variant = product.otherVariants[0];
   // console.log('product', product);
 
   useEffect(() => {
@@ -139,15 +159,15 @@ const ProductInfo = ({ product, home }) => {
       __typename: 'CartItem',
     };
     items.push(itemData);
-
     client.writeData({ data: { cartItems: items } });
 
     setTimeout(() => navigateTo('/cart'), 600);
   };
+  console.log('variantItem', product.otherVariants);
 
   return (
     <>
-      <Heading>{product.title}</Heading>
+      <Heading centered>{product.title}</Heading>
       <Price className="has-text-weight-semibold has-text-centered">
         {formatCurrency(variant.discountPrice)}{' '}
         {variant.discountPrice < variant.price && (
@@ -157,8 +177,25 @@ const ProductInfo = ({ product, home }) => {
       <Spring native from={{ opacity: 0 }} to={{ opacity: isVisible ? 1 : 0 }}>
         {stylesProps => (
           <animated.div style={stylesProps}>
+            <Variants>
+              {product.otherVariants.map(variantItem => {
+                return variantItem.color ? (
+                  <VariantColor
+                    key={variantItem.title}
+                    color={variantItem.color.hex}
+                    active={
+                      variant.color
+                        ? variant.color.hex === variantItem.color.hex
+                        : false
+                    }
+                    onClick={() => setVariant(variantItem)}
+                  />
+                ) : null;
+              })}
+            </Variants>
             <BuyBtn
               className="product-info-btn button is-dark is-large is-radiusless is-uppercase"
+              // eslint-disable-next-line prettier/prettier
               onClick={() => addToCart()}
             >
               Add to cart
@@ -175,7 +212,6 @@ const ProductInfo = ({ product, home }) => {
                   {/* <HTMLContent
                     content={product.shortDetails.childMarkdownRemark.html}
                   /> */}
-                  <p>Color: {variant.color}</p>
                   <p>Made in India</p>
                   <p>All prices include sales taxes and free UK delivery.</p>
                   <ProductCode>Product Code: {variant.sku}</ProductCode>

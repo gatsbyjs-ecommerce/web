@@ -28,7 +28,9 @@ export const categoryQuery = graphql`
             current
           }
           otherVariants {
-            color
+            color {
+              hex
+            }
             price
             discountPrice
             featuredImage {

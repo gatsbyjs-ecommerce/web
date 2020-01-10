@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
+import { first } from 'lodash';
 
 import config from '../utils/config';
 import Seo from './Seo';
@@ -27,17 +28,19 @@ export const query = graphql`
       productShippingReturns
     }
     sanityProduct(slug: { current: { eq: $slug } }) {
-      _id
+      id
       title
       slug {
         current
       }
+      tags
+      shippingCost
       _rawBody
       otherVariants {
-        color
+        color {
+          hex
+        }
         discountPrice
-        price
-        sku
         featuredImage {
           asset {
             fluid(maxWidth: 700) {
@@ -52,6 +55,9 @@ export const query = graphql`
             }
           }
         }
+        price
+        sku
+        title
       }
     }
     allSanityProduct(
@@ -61,13 +67,17 @@ export const query = graphql`
     ) {
       edges {
         node {
-          _id
+          id
           title
           slug {
             current
           }
           otherVariants {
-            color
+            _key
+            title
+            color {
+              hex
+            }
             discountPrice
             price
             sku
@@ -89,11 +99,20 @@ const ProductView = ({ data }) => {
   const product = data.sanityProduct;
   const products = data.allSanityProduct.edges;
   const home = data.sanitySiteSettings;
-  // console.log('products', products);
+  const [variant, setVariant] = useState({});
+  // console.log('variant', variant);
+
+  useEffect(() => {
+    const firstItem = first(product.otherVariants);
+    if (firstItem) {
+      setVariant(firstItem);
+    }
+  }, [product.otherVariants]);
 
   // const metaImage = product.featuredImage
   //   ? product.featuredImage.sizes.src
   //   : `${config.url}${config.logo}`;
+  // product.otherVariants[0]
 
   return (
     <Layout>
@@ -106,10 +125,15 @@ const ProductView = ({ data }) => {
       <div className="container">
         <Container className="columns">
           <div className="column is-two-fifths">
-            <ProductGallery product={product} />
+            <ProductGallery variant={variant} />
           </div>
           <div className="column section">
-            <ProductInfo home={home} product={product} />
+            <ProductInfo
+              home={home}
+              product={product}
+              variant={variant}
+              setVariant={setVariant}
+            />
           </div>
         </Container>
         <ProductsList title="We think you'll" products={products} />
