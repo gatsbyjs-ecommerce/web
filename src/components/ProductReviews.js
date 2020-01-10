@@ -1,0 +1,46 @@
+import React from 'react';
+import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+
+const Container = styled.section``;
+
+const ProductReviews = ({ reviews }) => (
+  <Container className="section">
+    <div className="container">
+      <h4 className="is-size-4 is-uppercase has-text-weight-semibold has-text-centered">
+        Reviews
+      </h4>
+      {reviews.map(({ node: review }) => (
+        <article className="media" key={review.id}>
+          <div className="media-content">
+            <div className="content">
+              <p>
+                <strong>{review.personName}</strong>
+                <br />
+                <ReactMarkdown source={review.comment} />
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+      <article className="media">
+        <div className="media-content">
+          <div className="field">
+            <p className="control">
+              <textarea className="textarea" placeholder="Add a comment..." />
+            </p>
+          </div>
+          <div className="field">
+            <p className="control">
+              <button type="button" className="button">
+                Post Review
+              </button>
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </Container>
+);
+
+export default ProductReviews;

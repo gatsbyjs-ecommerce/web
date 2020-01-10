@@ -10,6 +10,7 @@ import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
 import ProductsList from './ProductsList';
 import ProductSpecs from './ProductSpecs';
+import ProductReviews from './ProductReviews';
 
 const Container = styled.div``;
 
@@ -98,6 +99,15 @@ export const query = graphql`
         }
       }
     }
+    allSanityReview(sort: { fields: [_createdAt], order: DESC }) {
+      edges {
+        node {
+          id
+          comment
+          personName
+        }
+      }
+    }
   }
 `;
 
@@ -105,6 +115,7 @@ const ProductView = ({ data }) => {
   const product = data.sanityProduct;
   const products = data.allSanityProduct.edges;
   const home = data.sanitySiteSettings;
+  const reviews = data.allSanityReview.edges;
   const [variant, setVariant] = useState({});
   // console.log('variant', variant);
 
@@ -146,6 +157,7 @@ const ProductView = ({ data }) => {
         </section>
       </div>
       <ProductSpecs product={product} variant={variant} />
+      <ProductReviews reviews={reviews} />
       <div className="container">
         <ProductsList title="We think you'll" products={products} />
         <div className="has-text-centered	">
