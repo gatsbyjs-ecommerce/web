@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Spring, animated } from 'react-spring';
 import randomstring from 'randomstring';
 import gql from 'graphql-tag';
-import { useMutation, useApolloClient } from '@apollo/react-hooks';
-import { useStoreState } from 'easy-peasy';
+import { useMutation } from '@apollo/react-hooks';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 import { isEmpty } from 'lodash';
 
 import Heading from './Heading';
@@ -12,12 +12,15 @@ import CartItems from './CartItems';
 import CheckoutForm from './CheckoutForm';
 import PaymentForm from './PaymentForm';
 import PaymentConfirmed from './PaymentConfirmed';
+import { theme } from '../utils/theme';
 
 const createOrderMutation = gql`
-  mutation createOrder($input: OrderInput!) {
-    createOrder(input: $input) {
+  mutation createOrder($input: OrderInput!, $gateway: String) {
+    createOrder(input: $input, gateway: $gateway) {
       id
       orderId
+      paymentId
+      total
     }
   }
 `;
@@ -32,12 +35,12 @@ const verifyCardMutation = gql`
 
 const CartSteps = () => {
   const country = 'india';
-  const client = useApolloClient();
   const [activeStep, setActiveStep] = useState(1);
   const [userData, setUserData] = useState({});
   const [paymentData, setPaymentData] = useState({});
   const [orderData, setOrderData] = useState({});
   const cartItems = useStoreState(state => state.cart.items);
+  const emptyCart = useStoreActions(actions => actions.cart.empty);
   const [createOrder, { data: createOrderResult }] = useMutation(
     createOrderMutation,
   );
@@ -45,6 +48,28 @@ const CartSteps = () => {
     verifyCardMutation,
   );
   // console.log('data', data, verifyCardResult, createOrderResult);
+
+  const handleCreateOrder = async gateway => {
+    const tokenId = verifyCardResult ? verifyCardResult.verifyCard.id : '';
+    const orderId = randomstring.generate(6).toUpperCase();
+    const { email, fullName, ...address } = userData;
+    const productIds = cartItems.map(item => {
+      return item.id;
+    });
+    const inputData = {
+      tokenId,
+      orderId,
+      customer: { email, fullName, address: { ...address } },
+      productIds,
+    };
+
+    await createOrder({
+      variables: {
+        input: inputData,
+        gateway,
+      },
+    });
+  };
 
   useEffect(() => {
     // make verifyCard mutation to generate token
@@ -54,68 +79,65 @@ const CartSteps = () => {
   }, [paymentData]);
 
   useEffect(() => {
-    console.log('now create order', verifyCardResult);
     if (!verifyCardResult) {
       return;
     }
-    const tokenId = verifyCardResult.verifyCard.id;
-    const orderId = randomstring.generate(6).toUpperCase();
-    const { email, fullName, ...address } = userData;
-    const productIds = cartItems.map(item => {
-      return item.id;
-    });
-    createOrder({
-      variables: {
-        input: {
-          tokenId,
-          orderId,
-          customer: { email, fullName, address: { ...address } },
-          productIds,
-        },
-      },
-    });
+    handleCreateOrder('stripe');
   }, [verifyCardResult]);
 
   useEffect(() => {
-    console.log('now show success', createOrderResult);
+    // console.log('now show success', createOrderResult);
     if (!createOrderResult) {
       return;
     }
-    setOrderData(createOrderResult.createOrder);
-    setActiveStep(4);
 
-    // empty cart
-    client.writeData({ data: { cartItems: [] } });
+    if (country === 'india') {
+      // use razor pay
+      const options = {
+        key: 'rzp_test_utnkFIuYF4POGv', // Enter the Key ID generated from the Dashboard
+        amount: `${createOrderResult.createOrder.total}00`,
+        currency: 'INR',
+        name: '6in',
+        description: 'Phone accessories',
+        // image: 'https://example.com/your_logo',
+        order_id: createOrderResult.createOrder.paymentId, // This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+        handler(response) {
+          console.log('razorpay response', response);
+          // TODO: do mutation to update payment ID and payment status to success
+          setOrderData(createOrderResult.createOrder);
+          setActiveStep(4);
+          emptyCart();
+        },
+        prefill: {
+          name: userData.fullName,
+          email: userData.email,
+          contact: userData.telephone,
+        },
+        notes: {
+          address: userData.address,
+        },
+        theme: {
+          color: theme.mainBrandColor,
+        },
+      };
+      const rzp1 = new Razorpay(options);
+      rzp1.open();
+    } else {
+      setOrderData(createOrderResult.createOrder);
+      setActiveStep(4);
+      emptyCart();
+    }
   }, [createOrderResult]);
 
   const handleRazorPay = () => {
-    const options = {
-      key: 'rzp_live_IUxBVbUJmPlqhT', // Enter the Key ID generated from the Dashboard
-      amount: '50000', // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
-      currency: 'INR',
-      name: 'Acme Corp',
-      description:
-        'A Wild Sheep Chase is the third novel by Japanese author  Haruki Murakami',
-      image: 'https://example.com/your_logo',
-      order_id: 'order_9A33XWu170gUtm', // This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
-      handler(response) {
-        alert(response.razorpay_payment_id);
-      },
-      prefill: {
-        name: 'Gaurav Kumar',
-        email: 'gaurav.kumar@example.com',
-        contact: '9999999999',
-      },
-      notes: {
-        address: 'note value',
-      },
-      theme: {
-        color: '#F37254',
-      },
-    };
-    const rzp1 = new Razorpay(options);
-    rzp1.open();
+    handleCreateOrder('razorpay');
   };
+
+  useEffect(() => {
+    if (!isEmpty(userData) && country === 'india') {
+      handleRazorPay();
+    }
+  }, [userData]);
 
   return (
     <div className="section">
@@ -173,7 +195,7 @@ const CartSteps = () => {
                 handlePayment={data2 => {
                   if (country === 'india') {
                     // razorpay payment
-                    handleRazorPay();
+                    setUserData(data2);
                   } else {
                     // stripe payment
                     setActiveStep(3);

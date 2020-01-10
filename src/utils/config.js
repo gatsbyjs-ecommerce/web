@@ -7,7 +7,7 @@ module.exports = {
     'A ecommerce system using ReactJs, bundled with awesome GatsbyJs.',
   siteUrl: 'http://6in.co/',
   graphQlUri: 'https://6in-api.now.sh/api',
-  graphQlUriDev: 'https://6in-api.now.sh/api',
+  graphQlUriDev: 'http://localhost:4000/api',
   projectKey: '6in-co12',
 
   type: 'website',

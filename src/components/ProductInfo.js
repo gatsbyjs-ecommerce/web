@@ -128,7 +128,7 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
   const handleAddToCart = () => {
     const itemData = {
       itemId: makeId(5),
-      id: product.id,
+      id: product._id,
       title: product.title,
       sku: variant.sku,
       price: variant.discountPrice,

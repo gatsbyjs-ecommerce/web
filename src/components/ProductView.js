@@ -29,6 +29,7 @@ export const query = graphql`
       productShippingReturns
     }
     sanityProduct(slug: { current: { eq: $slug } }) {
+      _id
       id
       title
       slug {

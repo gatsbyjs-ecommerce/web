@@ -28,6 +28,9 @@ const schema = {
     remove: action((state, payload) => {
       state.items.splice(payload, 1);
     }),
+    empty: action(state => {
+      state.items = [];
+    }),
     // getById: selector([state => state.items], (stateResolvers, runtimeArgs) => {
     //   const [items] = stateResolvers;
     //   const [id] = runtimeArgs;
