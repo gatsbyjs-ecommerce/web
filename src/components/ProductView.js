@@ -9,6 +9,7 @@ import Layout from './Layout';
 import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
 import ProductsList from './ProductsList';
+import ProductSpecs from './ProductSpecs';
 
 const Container = styled.div``;
 
@@ -33,6 +34,14 @@ export const query = graphql`
       tags
       shippingCost
       _rawBody
+      tags
+      categories {
+        title
+        slug {
+          current
+        }
+        id
+      }
       otherVariants {
         color {
           hex
@@ -135,6 +144,9 @@ const ProductView = ({ data }) => {
             </div>
           </Container>
         </section>
+      </div>
+      <ProductSpecs product={product} variant={variant} />
+      <div className="container">
         <ProductsList title="We think you'll" products={products} />
         <div className="has-text-centered	">
           <ViewAllBtn to="/shop" className="button is-outlined is-medium">

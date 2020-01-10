@@ -130,6 +130,7 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
       itemId: makeId(5),
       id: product._id,
       title: product.title,
+      slug: product.slug.current,
       sku: variant.sku,
       price: variant.discountPrice,
       image: variant.featuredImage.asset.fluid.src,

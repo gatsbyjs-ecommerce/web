@@ -43,6 +43,17 @@ const Container = styled.div`
     background-color: transparent;
     color: ${props => darken(0.75, props.theme.textColor)};
   }
+  @media only screen and (min-width: 1024px) {
+    .navbar-dropdown {
+      background: #282828;
+      a.navbar-item {
+        color: #a0a0a0;
+      }
+      a.navbar-item:hover {
+        color: #ffffff;
+      }
+    }
+  }
 `;
 
 const LogoImg = styled.img`
