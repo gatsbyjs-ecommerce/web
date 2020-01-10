@@ -71,6 +71,10 @@ const ProductCode = styled.p`
 const ShareContainer = styled.div`
   padding: 0.9rem 0;
   border-top: 1px solid #979797;
+
+  .level-item {
+    float: left;
+  }
   h3 {
     text-transform: uppercase;
     font-weight: 700;

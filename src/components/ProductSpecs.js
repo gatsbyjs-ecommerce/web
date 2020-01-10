@@ -16,11 +16,11 @@ const ProductSpecs = ({ product, variant }) => (
   <Container className="section">
     <div className="container">
       <div className="columns is-mobile has-text-centered">
-        <div className="column is-2 is-offset-one-quarter">
+        <div className="column is-4-mobile is-2-tablet is-offset-one-quarter-tablet">
           <span className="tag-title">SKU</span>:{' '}
           {variant.sku ? variant.sku : '-'}
         </div>
-        <div className="column is-2">
+        <div className="column is-4-mobile is-2-tablet">
           <span className="tag-title">Category</span>:{' '}
           {product.categories &&
             product.categories.map(category => (
@@ -29,7 +29,7 @@ const ProductSpecs = ({ product, variant }) => (
               </Link>
             ))}
         </div>
-        <div className="column is-2">
+        <div className="column is-4-mobile is-2-tablet">
           <span className="tag-title">Tags</span>:{' '}
           {product.tags && product.tags.map(tag => <a key={tag}>{tag} </a>)}
         </div>

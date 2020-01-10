@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
-const Container = styled.section``;
+const Container = styled.section`
+  h4 {
+    margin-bottom: 1rem;
+  }
+`;
 
 const ProductReviews = ({ reviews }) => (
   <Container className="section">
