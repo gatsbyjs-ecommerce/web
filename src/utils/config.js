@@ -5,14 +5,12 @@ module.exports = {
   author: 'Parminder Klair',
   description:
     'A ecommerce system using ReactJs, bundled with awesome GatsbyJs.',
-  siteUrl: 'http://kickoff-gatsbyjs.netlify.com',
-  logo: '/images/logo-1024.png',
+  siteUrl: 'http://6in.co/',
   graphQlUri: 'https://6in-api.now.sh/api',
   graphQlUriDev: 'https://6in-api.now.sh/api',
 
-  homeBannerImage: '/images/home-hero-bg.webp',
   type: 'website',
-  googleAnalytics: '',
+  googleAnalytics: 'UA-1390187-43',
   backgroundColor: '#e0e0e0',
   themeColor: '#c62828',
 

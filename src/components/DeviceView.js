@@ -16,7 +16,11 @@ export const deviceQuery = graphql`
       }
     }
     allSanityProduct(
-      filter: { device: { elemMatch: { slug: { current: { eq: $slug } } } } }
+      filter: {
+        status: { eq: "active" }
+        device: { elemMatch: { slug: { current: { eq: $slug } } } }
+      }
+      sort: { fields: [listingOrder], order: ASC }
     ) {
       edges {
         node {

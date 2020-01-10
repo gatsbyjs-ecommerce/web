@@ -106,6 +106,16 @@ const GlobalStyle = createGlobalStyle`
   .image.is-5by4 {
     padding-top: 0;
   }
+  .markdown-container {
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+  }
 `;
 
 export default GlobalStyle;

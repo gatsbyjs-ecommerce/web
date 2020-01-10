@@ -12,7 +12,7 @@ const Container = styled.section`
 const HomeAbout = ({ data }) => (
   <Container className="container">
     <Heading>Who we are</Heading>
-    <HTMLContent content={data.homeIntro} />
+    <HTMLContent content={data.homeAboutUs} />
   </Container>
 );
 

@@ -62,7 +62,7 @@ export const query = graphql`
     }
     allSanityProduct(
       filter: { status: { eq: "active" }, slug: { current: { ne: $slug } } }
-      limit: 9
+      limit: 8
       sort: { fields: [_createdAt], order: DESC }
     ) {
       edges {

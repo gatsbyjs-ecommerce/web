@@ -142,7 +142,7 @@ const Header = () => {
                   <Link to="/contact" className="navbar-item">
                     Contact
                   </Link>
-                  <Link to="/shipping-info" className="navbar-item">
+                  <Link to="/page/delivery-information" className="navbar-item">
                     Shipping
                   </Link>
                 </div>

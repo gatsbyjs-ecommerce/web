@@ -17,8 +17,10 @@ export const categoryQuery = graphql`
     }
     allSanityProduct(
       filter: {
+        status: { eq: "active" }
         categories: { elemMatch: { slug: { current: { eq: $slug } } } }
       }
+      sort: { fields: [listingOrder], order: ASC }
     ) {
       edges {
         node {

@@ -12,11 +12,23 @@ import FeaturedCategories from '../components/FeaturedCategories';
 export const query = graphql`
   query HomePageQuery {
     sanitySiteSettings {
-      homeIntro
-      homeSliderSubTitle
+      title
       description
+      homeAboutUs
+      homeHeroTitle
+      homeHeroSubTitle
+      homeHeroImage {
+        asset {
+          fluid(maxWidth: 1600) {
+            ...GatsbySanityImageFluid
+          }
+        }
+      }
     }
-    allSanityProduct {
+    allSanityProduct(
+      filter: { status: { eq: "active" }, isFeatured: { eq: true } }
+      sort: { fields: [listingOrder], order: ASC }
+    ) {
       edges {
         node {
           id
@@ -71,7 +83,11 @@ const HomePage = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="6in" description={home.description} url={config.siteUrl} />
+      <Seo
+        title={home.title}
+        description={home.description}
+        url={config.siteUrl}
+      />
       <HomeBanner data={home} />
       <FeaturedCategories categories={categories} />
       <ProductsList products={products} />

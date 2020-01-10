@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Img from 'gatsby-image';
 
 import config from '../utils/config';
 
@@ -26,17 +27,23 @@ const StripMobile = styled.div`
   opacity: 0.9;
 `;
 
-const HomeBanner = ({ data }) => (
-  <Container className="container is-fluid">
-    <ContainerImage className="is-hidden-mobile">
-      <img src={config.homeBannerImage} alt="home banner" />
-    </ContainerImage>
-    <StripMobile className="is-hidden-tablet">
-      <p className="is-size-6	is-uppercase has-text-white has-text-centered has-text-weight-semibold">
-        {data.homeSliderSubTitle}
-      </p>
-    </StripMobile>
-  </Container>
-);
+const HomeBanner = ({ data }) => {
+  if (!data.homeHeroImage) {
+    return null;
+  }
+
+  return (
+    <Container className="container is-fluid">
+      <ContainerImage className="is-hidden-mobile">
+        <Img fluid={data.homeHeroImage.asset.fluid} />
+      </ContainerImage>
+      <StripMobile className="is-hidden-tablet">
+        <p className="is-size-6	is-uppercase has-text-white has-text-centered has-text-weight-semibold">
+          {data.homeHeroTitle}
+        </p>
+      </StripMobile>
+    </Container>
+  );
+};
 
 export default HomeBanner;

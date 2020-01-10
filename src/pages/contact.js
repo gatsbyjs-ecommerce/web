@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
+import SocialIcons from '../components/SocialIcons';
 
 export const query = graphql`
   query ContactQuery {
@@ -11,6 +12,10 @@ export const query = graphql`
       telephone
       email
       address
+      facebook
+      twitter
+      instagram
+      pinterest
     }
   }
 `;
@@ -71,11 +76,14 @@ const Contact = ({ data }) => {
                 <a href="#">
                   <button
                     type="submit"
-                    className="button is-secondary is-medium">
+                    className="button is-secondary is-medium"
+                  >
                     Get in touch
                   </button>
                 </a>
               </p>
+              <p>Social Media:</p>
+              <SocialIcons data={home} />
             </div>
             <div className="column is-two-fifths">
               <img

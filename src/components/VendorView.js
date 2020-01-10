@@ -14,7 +14,10 @@ export const vendorQuery = graphql`
         current
       }
     }
-    allSanityDevice(filter: { vendor: { slug: { current: { eq: $slug } } } }) {
+    allSanityDevice(
+      filter: { vendor: { slug: { current: { eq: $slug } } } }
+      sort: { fields: [listingOrder], order: ASC }
+    ) {
       edges {
         node {
           id

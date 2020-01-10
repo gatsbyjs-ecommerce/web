@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import ReactMarkdown from 'react-markdown';
 
 import config from '../utils/config';
 import Seo from './Seo';
@@ -34,7 +35,9 @@ export default class ArticleView extends React.Component {
         <div className="section">
           <div className="container">
             <Heading>{page.title}</Heading>
-            {page.description}
+            <div className="markdown-container">
+              <ReactMarkdown source={page.description} />
+            </div>
           </div>
         </div>
       </Layout>
