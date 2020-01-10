@@ -46,6 +46,7 @@ module.exports = {
         icon: `./static/images/6in-logo.png`,
       },
     },
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-offline`,
   ],
 };

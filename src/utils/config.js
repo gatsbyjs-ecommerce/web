@@ -5,7 +5,7 @@ module.exports = {
   author: 'Parminder Klair',
   description: 'Premium Phone Products',
   logo: 'https://www.6in.co/images/6in-logo.png',
-  siteUrl: 'https://www.6in.co/',
+  siteUrl: 'https://www.6in.co',
   graphQlUri: 'https://6in-api.now.sh/api',
   graphQlUriDev: 'http://localhost:4000/api',
   projectKey: '6in-co12',
