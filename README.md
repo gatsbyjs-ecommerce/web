@@ -1,6 +1,6 @@
 # 6in.co e-commerce site
 
-A minimalist static E-commerce site built using GatsbyJs.
+A static E-commerce site built using GatsbyJs.
 
 [Web Preview](https://6in.netlify.com/)
 
