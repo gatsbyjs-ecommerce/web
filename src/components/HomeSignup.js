@@ -23,7 +23,7 @@ const HomeSignup = () => {
   return (
     <Container className="section">
       <div className="container">
-        <div className="columns is-mobile">
+        <div className="columns">
           <div className="column is-two-fifths is-offset-one-third">
             <p>Free Standard Shipping | 30 day returns</p>
             <h3 className="is-size-3">First Time Customer?</h3>

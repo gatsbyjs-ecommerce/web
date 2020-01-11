@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 
 const Container = styled.div`
   position: relative;
-  margin-top: 2rem;
+  margin-top: -1px;
   margin-left: 10rem !important;
   margin-right: 10rem !important;
   max-height: 600px;
@@ -45,6 +45,12 @@ const TextContainer = styled.div`
     color: #fff;
     font-weight: 600;
   }
+  @media only screen and (max-width: 1024px) {
+    h4 {
+      font-size: 1.25rem !important;
+      margin-bottom: 8px;
+    }
+  }
 `;
 
 const HomeBanner = ({ data }) => {
@@ -63,8 +69,13 @@ const HomeBanner = ({ data }) => {
         <h4 className="is-size-2 is-uppercase has-text-white has-text-weight-bold">
           {data.homeHeroTitle}
         </h4>
-        <p className="is-size-3 has-text-white">{data.homeHeroSubTitle}</p>
-        <Link to={data.homeHeroLink} className="button is-medium">
+        <p className="is-size-3 has-text-white is-hidden-mobile">
+          {data.homeHeroSubTitle}
+        </p>
+        <Link
+          to={data.homeHeroLink}
+          className="button is-small-mobile is-medium-tablet"
+        >
           Shop Now
         </Link>
       </TextContainer>
