@@ -28,9 +28,14 @@ const BuyBtn = styled.button`
   margin-top: 3rem;
 `;
 
-const CartItems = ({ showCheckoutBtn, handlePayment, cartItems }) => {
+const CartItems = ({
+  showCheckoutBtn,
+  handlePayment,
+  cartItems,
+  discount,
+  setDiscount,
+}) => {
   const [total, setTotal] = useState(0);
-  const [discount, setDiscount] = useState(0);
   const [couponCode, setCouponCode] = useState(null);
   const removeFromCart = useStoreActions(actions => actions.cart.remove);
   // console.log('cartItems', cartItems);

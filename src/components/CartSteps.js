@@ -53,6 +53,7 @@ const CartSteps = () => {
   const [userData, setUserData] = useState({});
   const [paymentData, setPaymentData] = useState({});
   const [orderData, setOrderData] = useState({});
+  const [discount, setDiscount] = useState(0);
   const cartItems = useStoreState(state => state.cart.items);
   const emptyCart = useStoreActions(actions => actions.cart.empty);
   const [createOrder, { data: createOrderResult }] = useMutation(
@@ -76,6 +77,7 @@ const CartSteps = () => {
       orderId,
       customer: { email, fullName, address: { ...address } },
       products,
+      discount,
     };
 
     await createOrder({
@@ -203,6 +205,8 @@ const CartSteps = () => {
                 <CartItems
                   cartItems={cartItems}
                   showCheckoutBtn={activeStep === 1}
+                  discount={discount}
+                  setDiscount={setDiscount}
                   handlePayment={() => {
                     setActiveStep(2);
                   }}
@@ -218,6 +222,8 @@ const CartSteps = () => {
             <CartItems
               cartItems={cartItems}
               showCheckoutBtn={activeStep === 1}
+              discount={discount}
+              setDiscount={setDiscount}
               handlePayment={() => {
                 setActiveStep(2);
               }}
