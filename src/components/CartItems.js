@@ -36,24 +36,30 @@ const CartItems = ({
   setDiscount,
 }) => {
   const [total, setTotal] = useState(0);
+  const [shippingTotal, setShippingTotal] = useState(0);
   const [couponCode, setCouponCode] = useState(null);
   const removeFromCart = useStoreActions(actions => actions.cart.remove);
   // console.log('cartItems', cartItems);
 
   const handleApplyDiscount = ({ discountPercentage, code }) => {
     const discountNew = (discountPercentage / 100) * total;
-    setDiscount(discountNew);
+    setDiscount(Math.round(discountNew));
     setCouponCode(code);
   };
 
   const calculateTotal = () => {
     let newTotal = 0;
+    let newShipping = 0;
     cartItems.forEach(item => {
       newTotal += item.price;
+      if (item.shippingCost) {
+        newShipping += item.shippingCost;
+      }
     });
     if (total !== newTotal) {
       setTimeout(() => {
         setTotal(newTotal);
+        setShippingTotal(newShipping);
       }, 300);
     }
   };
@@ -124,7 +130,9 @@ const CartItems = ({
         <div className="column is-6 is-offset-6">
           <p className="is-size-5 has-text-dark has-text-right">
             <small>Shipping:</small>{' '}
-            <span className="has-text-weight-bold">{formatCurrency(0)}</span>
+            <span className="has-text-weight-bold">
+              {formatCurrency(shippingTotal)}
+            </span>
           </p>
           {discount > 0 && (
             <p className="is-size-5 has-text-dark has-text-right">
@@ -137,7 +145,7 @@ const CartItems = ({
           <p className="is-size-4 has-text-dark has-text-right">
             <small>Total:</small>{' '}
             <span className="has-text-weight-bold">
-              {formatCurrency(total - discount)}
+              {formatCurrency(total + shippingTotal - discount)}
             </span>
           </p>
         </div>

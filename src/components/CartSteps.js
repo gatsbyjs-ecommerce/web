@@ -28,7 +28,7 @@ const createOrderMutation = gql`
 `;
 
 const updateOrderMutation = gql`
-  mutation updateOrder($input: OrderInput!) {
+  mutation updateOrder($input: OrderUpdateInput!) {
     updateOrder(input: $input) {
       id
       orderId
@@ -139,8 +139,10 @@ const CartSteps = () => {
           // do mutation to update payment ID and payment status to success
           updateOrder({
             variables: {
-              orderId: createOrderResult.createOrder.orderId,
-              status: 'paid',
+              input: {
+                orderId: createOrderResult.createOrder.orderId,
+                status: 'paid',
+              },
             },
           });
           finishOrder();

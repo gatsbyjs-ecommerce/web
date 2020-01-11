@@ -160,6 +160,7 @@ const ProductInfo = ({ product, home, variant, setVariant, reviews }) => {
       id: product._id,
       title: product.title,
       slug: product.slug.current,
+      shippingCost: product.shippingCost,
       sku: variant.sku,
       price: variant.discountPrice,
       image: variant.featuredImage.asset.fluid.src,
