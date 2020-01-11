@@ -68,14 +68,14 @@ const CartSteps = () => {
     const tokenId = verifyCardResult ? verifyCardResult.verifyCard.id : '';
     const orderId = randomstring.generate(6).toUpperCase();
     const { email, fullName, ...address } = userData;
-    const productIds = cartItems.map(item => {
-      return item.id;
+    const products = cartItems.map(item => {
+      return { id: item.id, sku: item.sku };
     });
     const inputData = {
       tokenId,
       orderId,
       customer: { email, fullName, address: { ...address } },
-      productIds,
+      products,
     };
 
     await createOrder({
@@ -159,13 +159,9 @@ const CartSteps = () => {
     }
   }, [createOrderResult]);
 
-  const handleRazorPay = () => {
-    handleCreateOrder('razorpay');
-  };
-
   useEffect(() => {
     if (!isEmpty(userData) && country === 'india') {
-      handleRazorPay();
+      handleCreateOrder('razorpay');
     }
   }, [userData]);
 
