@@ -226,9 +226,6 @@ const ProductInfo = ({ product, home, variant, setVariant, reviews }) => {
                   )}
                   <p>Made in India</p>
                   <p>All prices include sales taxes.</p>
-                  {variant.sku && (
-                    <ProductCode>Product Code: {variant.sku}</ProductCode>
-                  )}
                 </AccordionItemBody>
               </AccordionItem>
               <AccordionItem>

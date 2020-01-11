@@ -133,10 +133,14 @@ const CartSteps = () => {
         description: config.description,
         image: config.logo,
         order_id: createOrderResult.createOrder.paymentId, // This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
-        handler(response) {
-          console.log('razorpay response', response);
+        handler() {
           // do mutation to update payment ID and payment status to success
-          updateOrder({ variables: { status: 'paid' } });
+          updateOrder({
+            variables: {
+              orderId: createOrderResult.createOrder.orderId,
+              status: 'paid',
+            },
+          });
           finishOrder();
         },
         prefill: {
