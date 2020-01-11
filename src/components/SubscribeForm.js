@@ -2,10 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
-import { graphql } from 'gatsby';
 import swal from 'sweetalert';
-
-// import apolloClient from '../utils/apolloClient';
+import addToMailchimp from 'gatsby-plugin-mailchimp';
 
 const Container = styled.form`
   margin-top: 1rem;
@@ -14,14 +12,6 @@ const Container = styled.form`
     border: 1px solid #979797;
     border-radius: 0px;
     color: #fff;
-  }
-`;
-
-const subscribeMutation = graphql`
-  mutation subscribe($email: String!) {
-    subscribe(email: $email) {
-      email
-    }
   }
 `;
 
@@ -59,7 +49,8 @@ class SubscribeForm extends React.Component {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="button is-light">
+              className="button is-light"
+            >
               Subscribe
             </button>
           </div>
@@ -78,20 +69,15 @@ export default withFormik({
       .required('Email is required!'),
   }),
   handleSubmit: (values, { setSubmitting }) => {
-    // console.log('handle submit', values, props);
-    // apolloClient
-    //   .mutate({
-    //     mutation: subscribeMutation,
-    //     variables: values,
-    //   })
-    //   .then(() => {
-    //     swal('Subscribed successfully, thank you!');
-    //     setSubmitting(false);
-    //   })
-    //   .catch(() => {
-    //     setSubmitting(false);
-    //     swal('Subscription failed, please try again.', 'error');
-    //   });
+    addToMailchimp(values.email)
+      .then(() => {
+        swal('Subscribed successfully, thank you!');
+        setSubmitting(false);
+      })
+      .catch(() => {
+        swal('Subscription failed, please try again.', 'error');
+        setSubmitting(false);
+      });
   },
   displayName: 'SubscribeForm', // helps with React DevTools
 })(SubscribeForm);
