@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
+import { Link } from 'gatsby';
 
 const Container = styled.div`
+  position: relative;
   margin-top: 2rem;
   margin-left: 10rem !important;
   margin-right: 10rem !important;
@@ -23,11 +25,26 @@ const ContainerImage = styled.div`
   }
 `;
 
-const StripMobile = styled.div`
-  padding: 0.3rem 0;
-  background-color: #100b0b;
-  width: 100%;
-  opacity: 0.9;
+const TextContainer = styled.div`
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  a,
+  p,
+  h4 {
+    color: ${props => props.textColor} !important;
+  }
+  p {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .button {
+    background-color: transparent;
+    box-shadow: none;
+    border: 1px solid ${props => props.textColor};
+    color: #fff;
+    font-weight: 600;
+  }
 `;
 
 const HomeBanner = ({ data }) => {
@@ -35,16 +52,22 @@ const HomeBanner = ({ data }) => {
     return null;
   }
 
+  const textColor = data.homeHeroTextColor.hex;
+
   return (
     <Container className="container is-fluid">
       <ContainerImage>
         <Img fluid={data.homeHeroImage.asset.fluid} />
       </ContainerImage>
-      {/* <StripMobile className="is-hidden-tablet">
-        <p className="is-size-6	is-uppercase has-text-white has-text-centered has-text-weight-semibold">
+      <TextContainer textColor={textColor}>
+        <h4 className="is-size-2 is-uppercase has-text-white has-text-weight-bold">
           {data.homeHeroTitle}
-        </p>
-      </StripMobile> */}
+        </h4>
+        <p className="is-size-3 has-text-white">{data.homeHeroSubTitle}</p>
+        <Link to={data.homeHeroLink} className="button is-medium">
+          Shop Now
+        </Link>
+      </TextContainer>
     </Container>
   );
 };

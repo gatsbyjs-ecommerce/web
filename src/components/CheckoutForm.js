@@ -10,6 +10,10 @@ const BuyBtn = styled.button`
   margin-top: 3rem;
 `;
 
+const Heading = styled.h3`
+  margin-bottom: 10px;
+`;
+
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
@@ -51,6 +55,7 @@ class CheckoutForm extends React.Component {
         >
           {stylesProps => (
             <animated.div style={stylesProps}>
+              <Heading className="is-size-5">Shipping address</Heading>
               <form onSubmit={handleSubmit}>
                 <div className="field">
                   <label className="label">Full name</label>

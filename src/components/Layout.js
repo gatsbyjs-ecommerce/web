@@ -7,6 +7,7 @@ import GlobalStyle, { theme } from '../utils/theme';
 import config from '../utils/config';
 import Header from './Header';
 import Footer from './Footer';
+import TopBar from './TopBar';
 
 const Container = styled.div`
   min-height: 70vh;
@@ -40,6 +41,7 @@ const IndexLayout = ({ children, hideHeader }) => {
             const home = data.sanitySiteSettings;
             return (
               <>
+                <TopBar />
                 {!hideHeader && <Header />}
                 <Container>{children}</Container>
                 <Footer home={home} />

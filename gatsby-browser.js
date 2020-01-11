@@ -4,7 +4,7 @@ import config from './src/utils/config';
 import wrapRoot from './src/utils/wrapRootElement';
 
 export const onClientEntry = () => {
-  ReactGA.initialize(config.googleAnalytics, { debug: true });
+  ReactGA.initialize(config.googleAnalytics, { debug: false });
   ReactGA.plugin.require('ecommerce');
 };
 

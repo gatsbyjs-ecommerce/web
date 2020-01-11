@@ -26,6 +26,15 @@ import { formatCurrency, makeId } from '../utils/helpers';
 import { BlockContent } from './Content';
 import Heading from './Heading';
 
+const RatingContainer = styled.div`
+  text-align: right;
+  margin-bottom: 5px;
+  span {
+    margin-left: 5px;
+    font-size: 0.9rem;
+  }
+`;
+
 const Price = styled.div`
   color: ${theme.primaryColor};
   font-size: 1.5rem;
@@ -40,6 +49,12 @@ const Price = styled.div`
 const BuyBtn = styled.button`
   width: 100%;
   margin-top: 3rem;
+`;
+
+const ShippingInfo = styled.p`
+  margin-top: 5px;
+  padding-right: 10px;
+  margin-bottom: 10px;
 `;
 
 const AccordionStyled = styled(Accordion)`
@@ -116,7 +131,7 @@ const VariantColor = styled.div`
     `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
 `;
 
-const ProductInfo = ({ product, home, variant, setVariant }) => {
+const ProductInfo = ({ product, home, variant, setVariant, reviews }) => {
   const [isVisible, setIsVisible] = useState(false);
   const addToCart = useStoreActions(actions => actions.cart.add);
   // console.log('product', product);
@@ -158,6 +173,14 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
 
   return (
     <>
+      <RatingContainer>
+        <i className="fas fa-star" />
+        <i className="fas fa-star" />
+        <i className="fas fa-star" />
+        <i className="fas fa-star" />
+        <i className="fas fa-star" />
+        <span>{reviews.length} Reviews</span>
+      </RatingContainer>
       <Heading centered>{product.title}</Heading>
       <Price className="has-text-weight-semibold has-text-centered">
         {formatCurrency(variant.discountPrice)}{' '}
@@ -185,12 +208,13 @@ const ProductInfo = ({ product, home, variant, setVariant }) => {
               })}
             </Variants>
             <BuyBtn
-              className="product-info-btn button is-dark is-large is-radiusless is-uppercase"
+              className="product-info-btn button is-dark is-medium is-radiusless is-uppercase"
               // eslint-disable-next-line prettier/prettier
               onClick={() => handleAddToCart()}
             >
               Add to cart
             </BuyBtn>
+            <ShippingInfo>Free Shipping to India.</ShippingInfo>
             <AccordionStyled>
               <AccordionItem expanded>
                 <AccordionItemTitle>

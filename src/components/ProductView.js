@@ -142,7 +142,7 @@ const ProductView = ({ data }) => {
       <div className="container">
         <section className="section">
           <Container className="columns">
-            <div className="column is-two-fifths">
+            <div className="column">
               <ProductGallery variant={variant} />
             </div>
             <div className="column section">
@@ -151,6 +151,7 @@ const ProductView = ({ data }) => {
                 product={product}
                 variant={variant}
                 setVariant={setVariant}
+                reviews={reviews}
               />
             </div>
           </Container>
