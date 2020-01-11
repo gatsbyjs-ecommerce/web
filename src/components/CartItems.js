@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
+import { Link } from 'gatsby';
 
 import { formatCurrency } from '../utils/helpers';
 import CouponForm from './CouponForm';
@@ -72,7 +73,15 @@ const CartItems = ({
   }, [cartItems]);
 
   if (cartItems.length === 0) {
-    return <p className="has-text-centered	is-size-4">No items in your cart.</p>;
+    return (
+      <div>
+        <h3 className="has-text-centered	is-size-4">No items in your cart.</h3>
+        <br />
+        <p className="has-text-centered	is-size-4">
+          <Link to="/shop">Browse to our product gallery</Link>
+        </p>
+      </div>
+    );
   }
 
   return (

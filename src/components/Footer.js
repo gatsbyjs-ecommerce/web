@@ -83,7 +83,16 @@ const Footer = ({ home }) => (
       <div className="section container">
         <div className="columns has-text-white">
           <div className="column">
-            <p>Copyright © 2020 - {config.siteName}</p>
+            <p>
+              Copyright © 2020 - {config.siteName} | build by{' '}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.zeiq.co"
+              >
+                zeiq.co
+              </a>
+            </p>
           </div>
           <div className="column has-text-right is-hidden-mobile">
             <img

@@ -16,7 +16,7 @@ const AccountPage = () => {
       <Seo title="My Account" description="My Orders" />
       <section className="section">
         <Container className="container">
-          <h1 className="title">Coming soon.</h1>
+          <h1 className="title">My Order History</h1>
         </Container>
       </section>
     </Layout>
