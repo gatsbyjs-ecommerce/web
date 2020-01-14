@@ -80,10 +80,6 @@ const AccordionStyled = styled(Accordion)`
   }
 `;
 
-const ProductCode = styled.p`
-  color: #b5b5b5 !important;
-`;
-
 const ShareContainer = styled.div`
   padding: 0.9rem 0;
   border-top: 1px solid #979797;
@@ -131,7 +127,31 @@ const VariantColor = styled.div`
     `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
 `;
 
-const ProductInfo = ({ product, home, variant, setVariant, reviews }) => {
+const VariantDevice = styled.div`
+  background-color: ${props => props.color};
+  height: 40px;
+  border-radius: 4px;
+  margin: 0 7px;
+  float: left;
+  cursor: pointer;
+  box-shadow: inset 0 0 2px #848484;
+  border: ${props =>
+    `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
+  padding: 0 8px;
+  align-items: center;
+  font-size: 0.85rem;
+  display: flex;
+`;
+
+const ProductInfo = ({
+  product,
+  home,
+  reviews,
+  variant,
+  setVariant,
+  variantDevice,
+  setVariantDevice,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const addToCart = useStoreActions(actions => actions.cart.add);
   // console.log('product', product);
@@ -165,6 +185,7 @@ const ProductInfo = ({ product, home, variant, setVariant, reviews }) => {
       price: variant.discountPrice,
       image: variant.featuredImage.asset.fluid.src,
       color: variant.color.hex,
+      device: variantDevice.title,
       quantity: 1,
     };
     addToCart(itemData);
@@ -193,20 +214,35 @@ const ProductInfo = ({ product, home, variant, setVariant, reviews }) => {
         {stylesProps => (
           <animated.div style={stylesProps}>
             <Variants>
-              {product.otherVariants.map(variantItem => {
-                return variantItem.color ? (
-                  <VariantColor
-                    key={variantItem.title}
-                    color={variantItem.color.hex}
-                    active={
-                      variant.color
-                        ? variant.color.hex === variantItem.color.hex
-                        : false
-                    }
-                    onClick={() => setVariant(variantItem)}
-                  />
-                ) : null;
-              })}
+              {product.otherVariants &&
+                product.otherVariants.map(variantItem => {
+                  return variantItem.color ? (
+                    <VariantColor
+                      key={variantItem.title}
+                      color={variantItem.color.hex}
+                      active={
+                        variant.color
+                          ? variant.color.hex === variantItem.color.hex
+                          : false
+                      }
+                      onClick={() => setVariant(variantItem)}
+                    />
+                  ) : null;
+                })}
+            </Variants>
+            <Variants>
+              {product.device &&
+                product.device.map(variantItem => {
+                  return (
+                    <VariantDevice
+                      key={variantItem.id}
+                      active={variantDevice.id === variantItem.id}
+                      onClick={() => setVariantDevice(variantItem)}
+                    >
+                      {variantItem.title}
+                    </VariantDevice>
+                  );
+                })}
             </Variants>
             <BuyBtn
               className="product-info-btn button is-dark is-medium is-radiusless is-uppercase"
