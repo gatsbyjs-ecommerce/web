@@ -1,7 +1,3 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-undef */
-/* eslint-disable no-return-assign */
-/* eslint-disable react/no-unescaped-entities */
 /* eslint react/destructuring-assignment: 0 */
 /* eslint jsx-a11y/html-has-lang: 0 */
 
@@ -35,17 +31,6 @@ export default class HTML extends React.Component {
             rel="stylesheet"
           />
           <script src="https://checkout.razorpay.com/v1/checkout.js" />
-          <script id="mcjs">
-            !function(c,h,i,m,p)
-            {
-              ((m = c.createElement(h)),
-              (p = c.getElementsByTagName(h)[0]),
-              (m.async = 1),
-              (m.src = i),
-              p.parentNode.insertBefore(m, p))
-            }
-            (document,"script","https://chimpstatic.com/mcjs-connected/js/users/cc89738f5e13735361f5b9aa9/fe7752cb372831b7a2090efd4.js");
-          </script>
           {/* Add custom css or scripts here */}
 
           {this.props.headComponents}
