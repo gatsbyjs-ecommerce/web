@@ -5,6 +5,8 @@ import { isUndefined } from 'lodash';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
+import countries from '../utils/countries';
+
 const BuyBtn = styled.button`
   width: 100%;
   margin-top: 3rem;
@@ -157,13 +159,27 @@ class CheckoutForm extends React.Component {
                     <div className="field">
                       <label className="label">Country</label>
                       <div className="control">
-                        <input
+                        <div className="select" name="country">
+                          <select
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.country}
+                          >
+                            <option>Select dropdown</option>
+                            {countries.map(country => (
+                              <option value={country.name}>
+                                {country.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        {/* <input
                           className="input is-shadowless"
                           name="country"
                           value={values.country}
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        />
+                        /> */}
                         {errors.country && touched.country && (
                           <p className="help is-danger">{errors.country}</p>
                         )}
@@ -223,14 +239,14 @@ class CheckoutForm extends React.Component {
 }
 
 export default withFormik({
-  mapPropsToValues: () => ({
+  mapPropsToValues: ({ initialValues }) => ({
     fullName: '',
     addressLine1: '',
     addressLine2: '',
     city: '',
     postcode: '',
     state: '',
-    country: '',
+    country: initialValues.country || '',
     email: '',
     telephone: '',
   }),

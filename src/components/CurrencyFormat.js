@@ -5,7 +5,10 @@ import { find } from 'lodash';
 
 export const getPrice = (pricing, isDiscount, location) => {
   let value = 0;
-  let price = find(pricing, { country: location.country });
+  let price;
+  if (location) {
+    price = find(pricing, { country: location.country });
+  }
   if (!price) {
     // if no country, use USD as default
     price = find(pricing, { country: 'United States of America' });

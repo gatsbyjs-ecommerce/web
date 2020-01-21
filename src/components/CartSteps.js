@@ -85,6 +85,7 @@ const CartSteps = () => {
       customer: { email, fullName, address: { ...address } },
       products,
       discount,
+      country: location.country,
     };
 
     await createOrder({
@@ -241,6 +242,8 @@ const CartSteps = () => {
           <div className="column section">
             {activeStep === 2 && (
               <CheckoutForm
+                enableReinitialize
+                initialValues={{ country: location.country }}
                 loading={loading}
                 handlePayment={data2 => {
                   setLoading(true);
