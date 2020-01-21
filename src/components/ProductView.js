@@ -33,7 +33,10 @@ export const query = graphql`
         current
       }
       tags
-      shippingCost
+      shippingCost {
+        price
+        country
+      }
       _rawBody
       tags
       categories {
@@ -51,7 +54,11 @@ export const query = graphql`
         color {
           hex
         }
-        discountPrice
+        pricing {
+          country
+          discountPrice
+          price
+        }
         featuredImage {
           asset {
             fluid(maxWidth: 700) {
@@ -66,7 +73,6 @@ export const query = graphql`
             }
           }
         }
-        price
         sku
         title
       }
@@ -89,8 +95,11 @@ export const query = graphql`
             color {
               hex
             }
-            discountPrice
-            price
+            pricing {
+              country
+              discountPrice
+              price
+            }
             sku
             featuredImage {
               asset {

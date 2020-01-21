@@ -5,7 +5,7 @@ import { animated } from 'react-spring';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
-import { formatCurrency } from '../utils/helpers';
+import CurrencyFormat from './CurrencyFormat';
 import DummyImage from './DummyImage';
 
 const Container = styled(animated.div)`
@@ -50,7 +50,7 @@ const ProductItem = ({ item, styles }) => {
                 <Link to={`/product/${item.slug.current}`}>{item.title}</Link>
               </p>
               <p className="title is-6">
-                {formatCurrency(variant.discountPrice)}
+                <CurrencyFormat pricing={variant.pricing} isDiscount />
               </p>
             </div>
           </div>

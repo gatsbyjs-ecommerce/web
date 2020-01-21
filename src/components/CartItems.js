@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useStoreActions } from 'easy-peasy';
 import { Link } from 'gatsby';
 
-import { formatCurrency } from '../utils/helpers';
+import CurrencyFormat from './CurrencyFormat';
 import CouponForm from './CouponForm';
 
 const Item = styled.article`
@@ -96,12 +96,6 @@ const CartItems = ({
                   className="cart-item-image"
                   alt={item.title}
                 />
-                {/* <Img
-                  sizes={item.image.sizes}
-                  alt={item.image.title}
-                  title={item.image.title}
-                  backgroundColor="#f1f1f1"
-                /> */}
               </div>
             </figure>
           )}
@@ -114,7 +108,7 @@ const CartItems = ({
                 </small>
                 <br />
                 <span className="is-size-5 has-text-weight-bold has-text-grey-dark">
-                  {formatCurrency(item.price)}
+                  <CurrencyFormat amount={item.price} />
                 </span>
                 <a className="remove" onClick={() => removeFromCart(index)}>
                   remove
@@ -140,21 +134,21 @@ const CartItems = ({
           <p className="is-size-5 has-text-dark has-text-right">
             <small>Shipping:</small>{' '}
             <span className="has-text-weight-bold">
-              {formatCurrency(shippingTotal)}
+              <CurrencyFormat amount={shippingTotal} />
             </span>
           </p>
           {discount > 0 && (
             <p className="is-size-5 has-text-dark has-text-right">
               <small>Discount:</small>{' '}
               <span className="has-text-weight-bold">
-                -{formatCurrency(discount)}
+                -<CurrencyFormat amount={discount} />
               </span>
             </p>
           )}
           <p className="is-size-4 has-text-dark has-text-right">
             <small>Total:</small>{' '}
             <span className="has-text-weight-bold">
-              {formatCurrency(total + shippingTotal - discount)}
+              <CurrencyFormat amount={total + shippingTotal - discount} />
             </span>
           </p>
         </div>

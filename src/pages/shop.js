@@ -22,8 +22,11 @@ export const query = graphql`
             color {
               hex
             }
-            price
-            discountPrice
+            pricing {
+              country
+              discountPrice
+              price
+            }
             featuredImage {
               asset {
                 fluid(maxWidth: 350) {

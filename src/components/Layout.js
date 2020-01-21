@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 import styled, { ThemeProvider } from 'styled-components';
 import { graphql, StaticQuery } from 'gatsby';
+import { useStoreActions } from 'easy-peasy';
+import axios from 'axios';
+import { find } from 'lodash';
 
 import GlobalStyle, { theme } from '../utils/theme';
 import config from '../utils/config';
+import currency from '../utils/currency';
 import Header from './Header';
 import Footer from './Footer';
 import TopBar from './TopBar';
@@ -25,6 +29,31 @@ const query = graphql`
 `;
 
 const IndexLayout = ({ children, hideHeader }) => {
+  const updateLocation = useStoreActions(
+    actions => actions.user.updateLocation,
+  );
+  useEffect(() => {
+    // get geo location
+    axios
+      .get('https://extreme-ip-lookup.com/json/')
+      .then(response => {
+        // handle success
+        const { data } = response;
+        const currentCurrency = find(currency, { code: data.countryCode });
+        updateLocation({
+          city: data.city,
+          country: data.country,
+          countryCode: data.countryCode,
+          region: data.region,
+          currency: currentCurrency.currency,
+        });
+      })
+      .catch(error => {
+        // handle error
+        console.log('unable to fetch location', error);
+      });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <>

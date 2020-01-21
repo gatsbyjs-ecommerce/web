@@ -47,7 +47,7 @@ const verifyCardMutation = gql`
 `;
 
 const CartSteps = () => {
-  const country = 'india';
+  const [country, setCountry] = useState('India');
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const [userData, setUserData] = useState({});
@@ -55,6 +55,7 @@ const CartSteps = () => {
   const [orderData, setOrderData] = useState({});
   const [discount, setDiscount] = useState(0);
   const cartItems = useStoreState(state => state.cart.items);
+  const location = useStoreState(state => state.user.location);
   const emptyCart = useStoreActions(actions => actions.cart.empty);
   const [createOrder, { data: createOrderResult }] = useMutation(
     createOrderMutation,
@@ -64,6 +65,12 @@ const CartSteps = () => {
     verifyCardMutation,
   );
   // console.log('data', data, verifyCardResult, createOrderResult);
+
+  useEffect(() => {
+    if (location && location.country) {
+      setCountry(location.country);
+    }
+  }, [location]);
 
   const handleCreateOrder = async gateway => {
     const tokenId = verifyCardResult ? verifyCardResult.verifyCard.id : '';
@@ -125,7 +132,7 @@ const CartSteps = () => {
       return;
     }
 
-    if (country === 'india') {
+    if (country === 'India') {
       // use razor pay
       const options = {
         key: config.razorPayKey, // Enter the Key ID generated from the Dashboard
@@ -168,7 +175,7 @@ const CartSteps = () => {
   }, [createOrderResult]);
 
   useEffect(() => {
-    if (!isEmpty(userData) && country === 'india') {
+    if (!isEmpty(userData) && country === 'India') {
       handleCreateOrder('razorpay');
     }
   }, [userData]);
@@ -237,7 +244,7 @@ const CartSteps = () => {
                 loading={loading}
                 handlePayment={data2 => {
                   setLoading(true);
-                  if (country === 'india') {
+                  if (country === 'India') {
                     // razorpay payment
                     setUserData(data2);
                   } else {

@@ -16,6 +16,4 @@ module.exports = {
   themeColor: '#E38D60',
   razorPayKey: 'rzp_live_IUxBVbUJmPlqhT',
   // razorPayKey: 'rzp_test_utnkFIuYF4POGv',
-
-  currency: '₹',
 };

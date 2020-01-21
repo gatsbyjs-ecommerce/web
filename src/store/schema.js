@@ -11,8 +11,18 @@ const schema = {
   },
   user: {
     data: {},
+    location: {
+      city: 'Ludhiana',
+      country: 'India',
+      countryCode: 'IN',
+      region: 'Punjab',
+      currency: '₹',
+    },
     update: action((state, payload) => {
       state.data = payload;
+    }),
+    updateLocation: action((state, payload) => {
+      state.location = payload;
     }),
   },
   cart: {

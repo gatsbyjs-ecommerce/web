@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { navigateTo } from 'gatsby';
 import ReactMarkdown from 'react-markdown';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import ReactGA from 'react-ga';
 import {
   Accordion,
@@ -22,7 +22,8 @@ import {
 
 import config from '../utils/config';
 import { theme } from '../utils/theme';
-import { formatCurrency, makeId } from '../utils/helpers';
+import { makeId } from '../utils/helpers';
+import CurrencyFormat, { getPrice } from './CurrencyFormat';
 import { BlockContent } from './Content';
 import Heading from './Heading';
 
@@ -153,6 +154,7 @@ const ProductInfo = ({
   setVariantDevice,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useStoreState(state => state.user.location);
   const addToCart = useStoreActions(actions => actions.cart.add);
   // console.log('product', product);
 
@@ -165,24 +167,25 @@ const ProductInfo = ({
   const metaUrl = `${config.siteUrl}/product/${product.slug.current}`;
   const metaTitle = `Checkout ${product.title} at 6in`;
 
-  ReactGA.plugin.execute('ecommerce', 'addItem', {
-    id: product._id,
-    title: product.title,
-    sku: variant.sku || '-',
-    price: variant.discountPrice,
-    // category: 'Cases',
-    quantity: '1',
-  });
-
   const handleAddToCart = () => {
+    const price = getPrice(variant.pricing, true, location);
+    ReactGA.plugin.execute('ecommerce', 'addItem', {
+      id: product._id,
+      title: product.title,
+      sku: variant.sku || '-',
+      price,
+      // category: 'Cases',
+      quantity: '1',
+    });
+
     const itemData = {
       itemId: makeId(5),
       id: product._id,
       title: product.title,
       slug: product.slug.current,
-      shippingCost: product.shippingCost,
+      shippingCost: getPrice(product.shippingCost, false, location),
       sku: variant.sku,
-      price: variant.discountPrice,
+      price,
       image: variant.featuredImage.asset.fluid.src,
       color: variant.color.hex,
       device: variantDevice.title,
@@ -205,9 +208,11 @@ const ProductInfo = ({
       </RatingContainer>
       <Heading centered>{product.title}</Heading>
       <Price className="has-text-weight-semibold has-text-centered">
-        {formatCurrency(variant.discountPrice)}{' '}
+        <CurrencyFormat pricing={variant.pricing} isDiscount />{' '}
         {variant.discountPrice < variant.price && (
-          <span>{formatCurrency(variant.price)}</span>
+          <span>
+            <CurrencyFormat pricing={variant.pricing} />
+          </span>
         )}
       </Price>
       <Spring native from={{ opacity: 0 }} to={{ opacity: isVisible ? 1 : 0 }}>
@@ -251,7 +256,7 @@ const ProductInfo = ({
             >
               Add to cart
             </BuyBtn>
-            <ShippingInfo>Free Shipping to India.</ShippingInfo>
+            <ShippingInfo>Free Shipping to {location.country}.</ShippingInfo>
             <AccordionStyled>
               <AccordionItem expanded>
                 <AccordionItemTitle>
