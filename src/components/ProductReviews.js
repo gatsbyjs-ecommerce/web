@@ -20,9 +20,8 @@ const ProductReviews = ({ reviews }) => (
             <div className="content">
               <p>
                 <strong>{review.personName}</strong>
-                <br />
-                <ReactMarkdown source={review.comment} />
               </p>
+              <ReactMarkdown source={review.comment} />
             </div>
           </div>
         </article>

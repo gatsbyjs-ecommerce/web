@@ -167,7 +167,7 @@ class CheckoutForm extends React.Component {
                           >
                             <option>Select dropdown</option>
                             {countries.map(country => (
-                              <option value={country.name}>
+                              <option key={country.code} value={country.name}>
                                 {country.name}
                               </option>
                             ))}

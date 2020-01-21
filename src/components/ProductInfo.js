@@ -223,7 +223,7 @@ const ProductInfo = ({
                 product.otherVariants.map(variantItem => {
                   return variantItem.color ? (
                     <VariantColor
-                      key={variantItem.title}
+                      key={variantItem.color.hex}
                       color={variantItem.color.hex}
                       active={
                         variant.color

@@ -39,18 +39,20 @@ const IndexLayout = ({ children, hideHeader }) => {
       .then(response => {
         // handle success
         const { data } = response;
-        const currentCurrency = find(currency, { code: data.countryCode });
-        updateLocation({
-          city: data.city,
-          country: data.country,
-          countryCode: data.countryCode,
-          region: data.region,
-          currency: currentCurrency.currency,
-        });
+        if (data) {
+          const currentCurrency = find(currency, { code: data.countryCode });
+          updateLocation({
+            city: data.city,
+            country: data.country,
+            countryCode: data.countryCode,
+            region: data.region,
+            currency: currentCurrency ? currentCurrency.currency : '$',
+          });
+        }
       })
       .catch(error => {
         // handle error
-        console.log('unable to fetch location', error);
+        console.log('unable to fetch ip data', error);
       });
   }, []);
 
