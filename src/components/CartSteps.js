@@ -86,6 +86,7 @@ const CartSteps = () => {
       products,
       discount,
       country: location.country,
+      currencyCode: location.currencyCode,
     };
 
     await createOrder({

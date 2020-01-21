@@ -187,7 +187,7 @@ const ProductInfo = ({
       sku: variant.sku,
       price,
       image: variant.featuredImage.asset.fluid.src,
-      color: variant.color.hex,
+      color: variant.color ? variant.color.hex : '',
       device: variantDevice.title,
       quantity: 1,
     };

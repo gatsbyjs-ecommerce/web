@@ -47,6 +47,9 @@ const IndexLayout = ({ children, hideHeader }) => {
             countryCode: data.countryCode,
             region: data.region,
             currency: currentCurrency ? currentCurrency.currency : '$',
+            currencyCode: currentCurrency
+              ? currentCurrency.currencyCode
+              : 'usd',
           });
         }
       })
