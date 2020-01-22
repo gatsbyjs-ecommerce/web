@@ -48,6 +48,7 @@ const TextContainer = styled.div`
   @media only screen and (max-width: 1024px) {
     h4 {
       font-size: 1.25rem !important;
+      line-height: 1.28rem !important;
       margin-bottom: 8px;
     }
   }

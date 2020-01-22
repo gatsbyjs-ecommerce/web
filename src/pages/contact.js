@@ -6,6 +6,7 @@ import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import SocialIcons from '../components/SocialIcons';
 import Heading from '../components/Heading';
+import ContactAddress from '../components/ContactAddress';
 
 export const query = graphql`
   query ContactQuery {
@@ -52,12 +53,6 @@ const Contact = ({ data }) => {
                 <br />
                 to give us a shout.
               </p>
-              <p>
-                <span role="img" aria-label="Round Pushpin">
-                  📍
-                </span>{' '}
-                {home.address}
-              </p>
               <p className="is-4">
                 <span role="img" aria-label="e-mail">
                   📧
@@ -69,6 +64,12 @@ const Contact = ({ data }) => {
                   ☎️
                 </span>{' '}
                 <a href={`tel:${home.telephone}`}>{home.telephone}</a>
+              </p>
+              <p>
+                <span role="img" aria-label="Round Pushpin">
+                  📍
+                </span>{' '}
+                <ContactAddress />
               </p>
               <p className="control">
                 <a href="#">

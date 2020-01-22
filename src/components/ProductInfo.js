@@ -128,6 +128,12 @@ const VariantColor = styled.div`
     `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
 `;
 
+const VariantsDevice = styled(Variants)`
+  @media only screen and (max-width: 1024px) {
+    display: block;
+  }
+`;
+
 const VariantDevice = styled.div`
   background-color: ${props => props.color};
   height: 40px;
@@ -142,6 +148,9 @@ const VariantDevice = styled.div`
   align-items: center;
   font-size: 0.85rem;
   display: flex;
+  @media only screen and (max-width: 1024px) {
+    margin-bottom: 7px;
+  }
 `;
 
 const ProductInfo = ({
@@ -235,7 +244,7 @@ const ProductInfo = ({
                   ) : null;
                 })}
             </Variants>
-            <Variants>
+            <VariantsDevice>
               {product.device &&
                 product.device.map(variantItem => {
                   return (
@@ -248,7 +257,7 @@ const ProductInfo = ({
                     </VariantDevice>
                   );
                 })}
-            </Variants>
+            </VariantsDevice>
             <BuyBtn
               className="product-info-btn button is-dark is-medium is-radiusless is-uppercase"
               // eslint-disable-next-line prettier/prettier

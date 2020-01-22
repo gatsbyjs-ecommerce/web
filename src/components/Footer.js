@@ -7,6 +7,7 @@ import config from '../utils/config';
 import SocialIcons from './SocialIcons';
 import SubscribeForm from './SubscribeForm';
 import ScrollButton from './ScrollButton';
+import ContactAddress from './ContactAddress';
 
 const Container = styled.footer`
   padding-bottom: 80px;
@@ -46,67 +47,73 @@ const NavItems = [
   { id: 8, name: 'Blog', url: '/blog' },
 ];
 
-const Footer = ({ home }) => (
-  <Container>
-    <div className="section container">
-      <div className="columns is-multiline">
-        <div className="column has-text-white">
-          <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
-            SUPPORT
-          </Heading>
-          <ul>
-            {NavItems.map(item => (
-              <li key={item.id}>
-                <Link to={item.url} className="has-text-white">
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="column has-text-white">
-          <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
-            Subscribe
-          </Heading>
-          <p>Receive special offers when you signup our mailing list</p>
-          <SubscribeForm />
-        </div>
-        <div className="column has-text-white">
-          <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
-            Connect
-          </Heading>
-          <SocialIcons data={home} inverted />
-        </div>
-      </div>
-    </div>
-    <Bottom>
+const Footer = ({ home }) => {
+  return (
+    <Container>
       <div className="section container">
-        <div className="columns has-text-white">
-          <div className="column">
-            <p>
-              Copyright © 2020 - {config.siteName} | build by{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.zeiq.co"
-              >
-                zeiq.co
-              </a>
-            </p>
+        <div className="columns is-multiline">
+          <div className="column has-text-white">
+            <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+              SUPPORT
+            </Heading>
+            <ul>
+              {NavItems.map(item => (
+                <li key={item.id}>
+                  <Link to={item.url} className="has-text-white">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="column has-text-right is-hidden-mobile">
-            <img
-              src="/images/payment-strip.png"
-              style={{ height: '26px' }}
-              alt="payments cards"
-            />
+          <div className="column has-text-white">
+            <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+              Subscribe
+            </Heading>
+            <p>Receive special offers when you signup our mailing list</p>
+            <SubscribeForm />
+          </div>
+          <div className="column has-text-white">
+            <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+              Connect
+            </Heading>
+            <SocialIcons data={home} inverted />
+            <Heading className="is-uppercase is-size-5 has-text-weight-semibold">
+              Company Info
+            </Heading>
+            <ContactAddress />
           </div>
         </div>
       </div>
-    </Bottom>
-    <ScrollButton scrollStepInPx="50" delayInMs="16.66" />
-  </Container>
-);
+      <Bottom>
+        <div className="section container">
+          <div className="columns has-text-white">
+            <div className="column">
+              <p>
+                Copyright © 2020 - {config.siteName} | build by{' '}
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.zeiq.co"
+                >
+                  zeiq.co
+                </a>
+              </p>
+            </div>
+            <div className="column has-text-right is-hidden-mobile">
+              <img
+                src="/images/payment-strip.png"
+                style={{ height: '26px' }}
+                alt="payments cards"
+              />
+            </div>
+          </div>
+        </div>
+      </Bottom>
+      <ScrollButton scrollStepInPx="50" delayInMs="16.66" />
+    </Container>
+  );
+};
 
 Footer.defaultProps = {
   home: {},
