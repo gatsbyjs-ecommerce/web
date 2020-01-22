@@ -27,20 +27,22 @@ const SocialIcons = ({ inverted, data }) => (
       </a>
     </div>
     <div className="level-item">
-      <a href={data.twitter} target="_blank">
-        <i className="fab fa-twitter-square" />
-      </a>
-    </div>
-    <div className="level-item">
       <a href={data.instagram} target="_blank">
         <i className="fab fa-instagram" />
       </a>
     </div>
     <div className="level-item">
-      <a href={data.pinterest} target="_blank">
-        <i className="fab fa-pinterest-square" />
+      <a href={data.twitter} target="_blank">
+        <i className="fab fa-twitter-square" />
       </a>
     </div>
+    {data.pinterest.length > 5 && (
+      <div className="level-item">
+        <a href={data.pinterest} target="_blank">
+          <i className="fab fa-pinterest-square" />
+        </a>
+      </div>
+    )}
   </Container>
 );
 

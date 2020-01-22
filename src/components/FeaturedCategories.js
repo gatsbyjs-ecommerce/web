@@ -45,9 +45,9 @@ const FeaturedCategoriesItem = ({ title, subtitle, link, image, imgWidth }) => (
 const FeaturedCategories = ({ categories }) => {
   const straps = find(categories, o => o.node.slug.current === 'straps');
   const cases = find(categories, o => o.node.slug.current === 'cases');
-  const airpodsCase = find(
+  const accessories = find(
     categories,
-    o => o.node.slug.current === 'airpods-case',
+    o => o.node.slug.current === 'accessories',
   );
 
   return (
@@ -77,11 +77,11 @@ const FeaturedCategories = ({ categories }) => {
             </div>
             <div className="tile is-parent">
               <FeaturedCategoriesItem
-                title="Accessories"
-                subtitle={airpodsCase.node.title}
+                title="Premium Accessories"
+                subtitle={accessories.node.title}
                 imgWidth="500px"
-                link="/apple/airpods"
-                image={airpodsCase.node.image}
+                link="/accessories"
+                image={accessories.node.image}
               />
             </div>
           </div>

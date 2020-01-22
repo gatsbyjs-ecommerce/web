@@ -135,7 +135,7 @@ const Header = () => {
               </div>
 
               <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/apple/apple-watch" className="navbar-link">
+                <Link to="/straps" className="navbar-link">
                   Apple Watch
                 </Link>
                 <div className="navbar-dropdown">

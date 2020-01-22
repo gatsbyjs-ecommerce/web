@@ -48,7 +48,7 @@ export default class VendorView extends React.Component {
     const { data } = this.props;
     const vendor = data.sanityVendor;
     const devices = data.allSanityDevice.edges;
-    // console.log('data', devices);
+    console.log('data', devices);
 
     return (
       <Layout>

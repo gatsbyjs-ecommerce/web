@@ -63,7 +63,7 @@ export const query = graphql`
       }
     }
     allSanityCategory(
-      filter: { slug: { current: { in: ["straps", "cases", "airpods-case"] } } }
+      filter: { slug: { current: { in: ["straps", "cases", "accessories"] } } }
     ) {
       edges {
         node {

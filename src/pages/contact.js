@@ -72,13 +72,12 @@ const Contact = ({ data }) => {
                 <ContactAddress />
               </p>
               <p className="control">
-                <a href="#">
-                  <button
-                    type="submit"
-                    className="button is-secondary is-medium"
-                  >
-                    Get in touch
-                  </button>
+                <a
+                  type="submit"
+                  className="button is-secondary is-medium"
+                  href={`mailto:${home.email}`}
+                >
+                  Get in touch
                 </a>
               </p>
               <p>Social Media:</p>
