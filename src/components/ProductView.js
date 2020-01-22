@@ -147,17 +147,17 @@ const ProductView = ({ data }) => {
     }
   }, [product.device]);
 
-  // const metaImage = product.featuredImage
-  //   ? product.featuredImage.sizes.src
-  //   : `${config.url}${config.logo}`;
-  // product.otherVariants[0]
+  const metaImage = variant.featuredImage
+    ? variant.featuredImage.asset.fluid.src
+    : `${config.logo}`;
 
   return (
     <Layout>
       <Seo
         title={product.title}
-        url={`${config.siteUrl}/product/${product.slug}`}
-        // image={metaImage}
+        description={`Buy by ${product.title} at 6in.co`}
+        url={`${config.siteUrl}/product/${product.slug.title}`}
+        image={metaImage}
         isProduct
       />
       <div className="container">

@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import NewsItem from '../components/NewsItem';
 import Heading from '../components/Heading';
+import config from '../utils/config';
 
 export const pageQuery = graphql`
   query blog {
@@ -34,7 +35,11 @@ const Blog = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="News & Updates" />
+      <Seo
+        title="News & Updates"
+        description="Latest news at 6in.co"
+        url={`${config.siteUrl}/account`}
+      />
       <section className="section">
         <Container className="container">
           <Heading>News & Updates</Heading>

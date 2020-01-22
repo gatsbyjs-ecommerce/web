@@ -29,7 +29,7 @@ export default class PageView extends React.Component {
       <Layout>
         <Seo
           title={page.title}
-          description=""
+          description={`Read news & updates about ${page.title}`}
           url={`${config.siteUrl}/page/${page.slug}`}
         />
         <section className="section">

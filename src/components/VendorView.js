@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import Seo from './Seo';
 import Layout from './Layout';
 import DevicesList from './DevicesList';
+import config from '../utils/config';
 
 export const vendorQuery = graphql`
   query VendorByPath($slug: String!) {
@@ -48,11 +49,15 @@ export default class VendorView extends React.Component {
     const { data } = this.props;
     const vendor = data.sanityVendor;
     const devices = data.allSanityDevice.edges;
-    console.log('data', devices);
+    // console.log('data', devices);
 
     return (
       <Layout>
-        <Seo title={vendor.title} description="" />
+        <Seo
+          title={vendor.title}
+          description={`Find accessories for devices by ${vendor.title} at 6in.co`}
+          url={`${config.siteUrl}/${vendor.slug.current}`}
+        />
         <DevicesList title={vendor.title} devices={devices} />
       </Layout>
     );

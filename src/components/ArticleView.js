@@ -29,7 +29,7 @@ export default class ArticleView extends React.Component {
       <Layout>
         <Seo
           title={page.title}
-          description=""
+          description={`Read blog post about ${page.title}`}
           url={`${config.siteUrl}/article/${page.slug}`}
         />
         <section className="section">

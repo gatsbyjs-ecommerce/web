@@ -14,6 +14,12 @@ export const deviceQuery = graphql`
       slug {
         current
       }
+      vendor {
+        title
+        slug {
+          current
+        }
+      }
     }
     allSanityProduct(
       filter: {
@@ -61,7 +67,11 @@ export default class DeviceView extends React.Component {
 
     return (
       <Layout>
-        <Seo title={device.title} description="" />
+        <Seo
+          title={device.title}
+          description={`Find accessories for ${device.vendor.title} ${device.title} at 6in.co`}
+          url={`${config.siteUrl}/${device.vendor.slug.current}/${device.slug.current}`}
+        />
         <ProductsList title={device.title} products={products} />
       </Layout>
     );

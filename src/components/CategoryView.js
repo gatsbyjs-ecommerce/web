@@ -61,7 +61,11 @@ export default class CategoryView extends React.Component {
 
     return (
       <Layout>
-        <Seo title={category.title} description="" />
+        <Seo
+          title={category.title}
+          description={`Get all ${category.title} products at 6in.co`}
+          url={`${config.siteUrl}/${category.slug.current}`}
+        />
         <div className="container">
           <section className="section">
             <ProductsList title={category.title} products={products} />

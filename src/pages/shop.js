@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import ProductsList from '../components/ProductsList';
+import config from '../utils/config';
 
 export const query = graphql`
   query ShopPageQuery {
@@ -46,7 +47,11 @@ const ShopPage = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="Shop" description="All Products at 6in" />
+      <Seo
+        title="Shop"
+        description="All Products at 6in.co"
+        url={`${config.siteUrl}/shop`}
+      />
       <ProductsList products={products} />
     </Layout>
   );

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
+import config from '../utils/config';
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -13,7 +14,11 @@ const Container = styled.div`
 const AccountPage = () => {
   return (
     <Layout>
-      <Seo title="My Account" description="My Orders" />
+      <Seo
+        title="My Account"
+        description="My Orders at 6in.co"
+        url={`${config.siteUrl}/account`}
+      />
       <section className="section">
         <Container className="container">
           <h1 className="title">My Order History</h1>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
+import config from '../utils/config';
 import Seo from '../components/Seo';
 import Layout from '../components/Layout';
 import SocialIcons from '../components/SocialIcons';
@@ -42,7 +43,11 @@ const Contact = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="Contact Us" />
+      <Seo
+        title="Contact Us"
+        description="Get in touch with us at 6in.co"
+        url={`${config.siteUrl}/cart`}
+      />
       <Section className="section">
         <div className="container">
           <div className="columns is-centered">
