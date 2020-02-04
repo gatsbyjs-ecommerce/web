@@ -11,8 +11,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mailchimp',
       options: {
-        endpoint:
-          'https://media.us16.list-manage.com/subscribe/post?u=cc89738f5e13735361f5b9aa9&amp;id=1dbaedf792',
+        endpoint: config.mailchimp,
       },
     },
     {
@@ -25,11 +24,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: '1noazxoy',
+        projectId: config.sanityId,
         dataset: 'production',
-        // a token with read permissions is required
-        // if you have a private dataset
-        token: process.env.SANITY_TOKEN,
       },
     },
     `gatsby-plugin-styled-components`,
@@ -43,7 +39,7 @@ module.exports = {
         background_color: config.backgroundColor,
         theme_color: config.themeColor,
         display: `minimal-ui`,
-        icon: `./static/images/6in-logo.png`,
+        icon: `./static/images/logo.png`,
       },
     },
     `gatsby-plugin-netlify`,

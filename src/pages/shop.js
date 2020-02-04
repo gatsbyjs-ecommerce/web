@@ -49,7 +49,7 @@ const ShopPage = ({ data }) => {
     <Layout>
       <Seo
         title="Shop"
-        description="All Products at 6in.co"
+        description={`All Products at ${config.siteName}`}
         url={`${config.siteUrl}/shop`}
       />
       <ProductsList products={products} />

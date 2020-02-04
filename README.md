@@ -1,14 +1,6 @@
-# 6in.co e-commerce site
+# GatsbyJs e-commerce site
 
 A static E-commerce site built using GatsbyJs.
-
-[Web Preview](https://6in.netlify.com/)
-
-[Admin Panel](https://sixin.sanity.studio/)
-
-[API Endpoint](https://6in-api.now.sh/api)
-
-[Graphql Endpoint](https://1noazxoy.api.sanity.io/v1/graphql/production/default)
 
 Admin panel can be found in [Admin repository](https://github.com/gatsbyjs-ecommerce/admin)
 
@@ -44,7 +36,7 @@ yarn install
 
 ## Development
 
-To start development server
+To start the development server
 
 ```
 yarn start

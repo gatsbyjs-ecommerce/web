@@ -37,7 +37,7 @@ const Blog = ({ data }) => {
     <Layout>
       <Seo
         title="News & Updates"
-        description="Latest news at 6in.co"
+        description={`Latest news at ${config.siteName}`}
         url={`${config.siteUrl}/account`}
       />
       <section className="section">

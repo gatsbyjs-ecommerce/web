@@ -10,7 +10,7 @@ const Cart = () => {
     <Layout>
       <Seo
         title="Cart"
-        description="Your order items at 6in.co"
+        description={`Your order items at ${config.siteName}`}
         url={`${config.siteUrl}/cart`}
       />
       <CartSteps />

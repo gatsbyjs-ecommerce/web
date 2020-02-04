@@ -55,7 +55,7 @@ export default class VendorView extends React.Component {
       <Layout>
         <Seo
           title={vendor.title}
-          description={`Find accessories for devices by ${vendor.title} at 6in.co`}
+          description={`Find accessories for devices by ${vendor.title} at ${config.siteName}`}
           url={`${config.siteUrl}/${vendor.slug.current}`}
         />
         <DevicesList title={vendor.title} devices={devices} />

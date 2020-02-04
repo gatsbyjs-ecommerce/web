@@ -155,7 +155,7 @@ const ProductView = ({ data }) => {
     <Layout>
       <Seo
         title={product.title}
-        description={`Buy by ${product.title} at 6in.co`}
+        description={`Buy by ${product.title} at ${config.siteName}`}
         url={`${config.siteUrl}/product/${product.slug.title}`}
         image={metaImage}
         isProduct

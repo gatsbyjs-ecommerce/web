@@ -174,7 +174,7 @@ const ProductInfo = ({
   }, []);
 
   const metaUrl = `${config.siteUrl}/product/${product.slug.current}`;
-  const metaTitle = `Checkout ${product.title} at 6in`;
+  const metaTitle = `Checkout ${product.title} at ${config.siteName}`;
 
   const handleAddToCart = () => {
     const price = getPrice(variant.pricing, true, location);
@@ -298,7 +298,7 @@ const ProductInfo = ({
                     <FacebookShareButton
                       url={metaUrl}
                       quote={metaTitle}
-                      hashtag="#sejalsuits"
+                      hashtag="#ecommerce"
                     >
                       <i className="fab fa-facebook-square" />
                     </FacebookShareButton>
@@ -307,7 +307,7 @@ const ProductInfo = ({
                     <TwitterShareButton
                       url={metaUrl}
                       title={metaTitle}
-                      hashtags={['sejalsuits', 'punjabisuits']}
+                      hashtags={['ecommerce']}
                     >
                       <i className="fab fa-twitter-square" />
                     </TwitterShareButton>

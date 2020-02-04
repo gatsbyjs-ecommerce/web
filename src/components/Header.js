@@ -6,6 +6,8 @@ import { darken } from 'polished';
 import { useStoreState } from 'easy-peasy';
 import ReactGA from 'react-ga';
 
+import config from '../utils/config';
+
 const Container = styled.div`
   padding: 0 0;
   border-bottom: ${props => `1px solid ${props.theme.borderColor}`};
@@ -82,7 +84,7 @@ const Header = () => {
         <div className="container">
           <div className="navbar-brand">
             <Link to="/" className="navbar-item">
-              <LogoImg src="/images/6in-logo.png" alt="6in logo" />
+              <LogoImg src="/images/logo.png" alt={config.siteName} />
             </Link>
 
             <MobileCart className="is-hidden-tablet">

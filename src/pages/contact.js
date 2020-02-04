@@ -45,7 +45,7 @@ const Contact = ({ data }) => {
     <Layout>
       <Seo
         title="Contact Us"
-        description="Get in touch with us at 6in.co"
+        description={`Get in touch with us at ${config.siteName}`}
         url={`${config.siteUrl}/cart`}
       />
       <Section className="section">

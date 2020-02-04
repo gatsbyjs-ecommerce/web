@@ -16,7 +16,7 @@ const AccountPage = () => {
     <Layout>
       <Seo
         title="My Account"
-        description="My Orders at 6in.co"
+        description={`My Orders at ${config.siteName}`}
         url={`${config.siteUrl}/account`}
       />
       <section className="section">
