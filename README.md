@@ -1,4 +1,4 @@
-# GatsbyJs e-commerce site
+# GatsbyJs Ecommerce
 
 A minimalist static E-commerce site built using GatsbyJs.
 
