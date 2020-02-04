@@ -17,7 +17,9 @@
     "develop": "gatsby develop",
     "serve": "gatsby serve",
     "build": "gatsby build",
-    "lint": "eslint --ignore-path .gitignore \"src/**/*.{js,jsx}\""
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.{js,jsx}\"",
+    "now-dev": "gatsby develop",
+    "now-build": "gatsby build"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.0",
