@@ -128,40 +128,7 @@ const VariantColor = styled.div`
     `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
 `;
 
-const VariantsDevice = styled(Variants)`
-  @media only screen and (max-width: 1024px) {
-    display: block;
-  }
-`;
-
-const VariantDevice = styled.div`
-  background-color: ${props => props.color};
-  height: 40px;
-  border-radius: 4px;
-  margin: 0 7px;
-  float: left;
-  cursor: pointer;
-  box-shadow: inset 0 0 2px #848484;
-  border: ${props =>
-    `2px solid ${props.active ? props.theme.mainBrandColor : 'white'}`};
-  padding: 0 8px;
-  align-items: center;
-  font-size: 0.85rem;
-  display: flex;
-  @media only screen and (max-width: 1024px) {
-    margin-bottom: 7px;
-  }
-`;
-
-const ProductInfo = ({
-  product,
-  home,
-  reviews,
-  variant,
-  setVariant,
-  variantDevice,
-  setVariantDevice,
-}) => {
+const ProductInfo = ({ product, home, reviews, variant, setVariant }) => {
   const [isVisible, setIsVisible] = useState(false);
   const location = useStoreState(state => state.user.location);
   const addToCart = useStoreActions(actions => actions.cart.add);
@@ -197,7 +164,6 @@ const ProductInfo = ({
       price,
       image: variant.featuredImage.asset.fluid.src,
       color: variant.color ? variant.color.hex : '',
-      device: variantDevice.title,
       quantity: 1,
     };
     addToCart(itemData);
@@ -244,20 +210,6 @@ const ProductInfo = ({
                   ) : null;
                 })}
             </Variants>
-            <VariantsDevice>
-              {product.device &&
-                product.device.map(variantItem => {
-                  return (
-                    <VariantDevice
-                      key={variantItem.id}
-                      active={variantDevice.id === variantItem.id}
-                      onClick={() => setVariantDevice(variantItem)}
-                    >
-                      {variantItem.title}
-                    </VariantDevice>
-                  );
-                })}
-            </VariantsDevice>
             <BuyBtn
               className="product-info-btn button is-dark is-medium is-radiusless is-uppercase"
               // eslint-disable-next-line prettier/prettier

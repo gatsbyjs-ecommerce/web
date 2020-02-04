@@ -46,10 +46,6 @@ export const query = graphql`
         }
         id
       }
-      device {
-        id
-        title
-      }
       otherVariants {
         color {
           hex
@@ -130,7 +126,6 @@ const ProductView = ({ data }) => {
   const home = data.sanitySiteSettings;
   const reviews = data.allSanityReview.edges;
   const [variant, setVariant] = useState({});
-  const [variantDevice, setVariantDevice] = useState({});
   // console.log('variant', variant);
 
   useEffect(() => {
@@ -139,13 +134,6 @@ const ProductView = ({ data }) => {
       setVariant(firstItem);
     }
   }, [product.otherVariants]);
-
-  useEffect(() => {
-    const firstItem = first(product.device);
-    if (firstItem) {
-      setVariantDevice(firstItem);
-    }
-  }, [product.device]);
 
   const metaImage = variant.featuredImage
     ? variant.featuredImage.asset.fluid.src
@@ -173,8 +161,6 @@ const ProductView = ({ data }) => {
                 reviews={reviews}
                 variant={variant}
                 setVariant={setVariant}
-                variantDevice={variantDevice}
-                setVariantDevice={setVariantDevice}
               />
             </div>
           </Container>

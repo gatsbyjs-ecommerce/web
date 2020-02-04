@@ -14,7 +14,7 @@ module.exports = {
   googleAnalytics: '',
   backgroundColor: '#e0e0e0',
   themeColor: '#E38D60',
-  sanityId: '1noazxoy',
+  sanityId: '2jkk6tlv',
   razorPayKey: '',
   mailchimp: '',
 };

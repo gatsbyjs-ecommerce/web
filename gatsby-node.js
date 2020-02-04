@@ -45,21 +45,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
-      allSanityDevice {
-        edges {
-          node {
-            id
-            slug {
-              current
-            }
-            vendor {
-              slug {
-                current
-              }
-            }
-          }
-        }
-      }
       allSanityCategory {
         edges {
           node {
@@ -80,7 +65,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const pages = result.data.allSanityPage.edges || [];
   const articles = result.data.allSanityArticle.edges || [];
   const vendors = result.data.allSanityVendor.edges || [];
-  const devices = result.data.allSanityDevice.edges || [];
   const categories = result.data.allSanityCategory.edges || [];
 
   products.forEach(({ node }) => {
@@ -101,18 +85,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       // additional data can be passed via context
       context: {
         slug: node.slug.current,
-      },
-    });
-  });
-
-  devices.forEach(({ node }) => {
-    createPage({
-      path: `${node.vendor.slug.current}/${node.slug.current}`,
-      component: path.resolve(`src/components/DeviceView.js`),
-      // additional data can be passed via context
-      context: {
-        slug: node.slug.current,
-        vendorSlug: node.vendor.slug.current,
       },
     });
   });

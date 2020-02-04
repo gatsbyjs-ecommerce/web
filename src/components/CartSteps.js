@@ -77,7 +77,7 @@ const CartSteps = () => {
     const orderId = randomstring.generate(6).toUpperCase();
     const { email, fullName, ...address } = userData;
     const products = cartItems.map(item => {
-      return { id: item.id, sku: item.sku, device: item.device };
+      return { id: item.id, sku: item.sku };
     });
     const inputData = {
       tokenId,

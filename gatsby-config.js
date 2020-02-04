@@ -8,12 +8,12 @@ module.exports = {
     siteUrl: config.siteUrl,
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-mailchimp',
-      options: {
-        endpoint: config.mailchimp,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-mailchimp',
+    //   options: {
+    //     endpoint: config.mailchimp,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {

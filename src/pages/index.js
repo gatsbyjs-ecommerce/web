@@ -8,7 +8,6 @@ import HomeBanner from '../components/HomeBanner';
 import HomeSignup from '../components/HomeSignup';
 import ProductsList from '../components/ProductsList';
 import HomeAbout from '../components/HomeAbout';
-import FeaturedCategories from '../components/FeaturedCategories';
 
 export const query = graphql`
   query HomePageQuery {
@@ -62,33 +61,12 @@ export const query = graphql`
         }
       }
     }
-    allSanityCategory(
-      filter: { slug: { current: { in: ["straps", "cases", "accessories"] } } }
-    ) {
-      edges {
-        node {
-          id
-          title
-          slug {
-            current
-          }
-          image {
-            asset {
-              fluid(maxWidth: 500) {
-                ...GatsbySanityImageFluid
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `;
 
 const HomePage = ({ data }) => {
   const home = data.sanitySiteSettings;
   const products = data.allSanityProduct.edges;
-  const categories = data.allSanityCategory.edges;
 
   return (
     <Layout>
@@ -98,7 +76,6 @@ const HomePage = ({ data }) => {
         url={config.siteUrl}
       />
       <HomeBanner data={home} />
-      <FeaturedCategories categories={categories} />
       <ProductsList products={products} />
       <HomeSignup />
       <HomeAbout data={home} />
