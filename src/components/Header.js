@@ -97,9 +97,9 @@ const Header = () => {
   const [isActive, setIsActive] = useState(false);
   const cartItems = useStoreState(state => state.cart.items);
   const data = useStaticQuery(categoriesQuery);
-  const allCategories = data.allSanityCategory.edges;
-  // console.log('categories', categories);
+
   // filter categories
+  const allCategories = data.allSanityCategory.edges;
   const parentCategories = filter(allCategories, o => o.node.parents === null);
   const categories = parentCategories.map(o => {
     const children = filter(allCategories, oc => {
@@ -107,7 +107,6 @@ const Header = () => {
     });
     return { ...o.node, children };
   });
-  console.log('categories', categories);
 
   return (
     <Container>
