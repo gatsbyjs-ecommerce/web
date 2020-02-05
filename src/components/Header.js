@@ -1,12 +1,35 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import { darken } from 'polished';
 import { useStoreState } from 'easy-peasy';
 import ReactGA from 'react-ga';
+import { filter } from 'lodash';
 
 import config from '../utils/config';
+
+const categoriesQuery = graphql`
+  query allSanityCategory {
+    allSanityCategory(sort: { fields: title, order: ASC }) {
+      edges {
+        node {
+          id
+          slug {
+            current
+          }
+          title
+          parents {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 const Container = styled.div`
   padding: 0 0;
@@ -73,6 +96,18 @@ const MobileCart = styled.div`
 const Header = () => {
   const [isActive, setIsActive] = useState(false);
   const cartItems = useStoreState(state => state.cart.items);
+  const data = useStaticQuery(categoriesQuery);
+  const allCategories = data.allSanityCategory.edges;
+  // console.log('categories', categories);
+  // filter categories
+  const parentCategories = filter(allCategories, o => o.node.parents === null);
+  const categories = parentCategories.map(o => {
+    const children = filter(allCategories, oc => {
+      return oc.node.parents !== null && oc.node.parents.id === o.node.id;
+    });
+    return { ...o.node, children };
+  });
+  console.log('categories', categories);
 
   return (
     <Container>
@@ -119,53 +154,30 @@ const Header = () => {
             className={`navbar-menu ${isActive ? 'is-active' : ''}`}
           >
             <div className="navbar-start">
-              <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/apple" className="navbar-link">
-                  iPhone
-                </Link>
-                <div className="navbar-dropdown">
-                  <Link to="/apple/iphone-11" className="navbar-item">
-                    iPhone 11
-                  </Link>
-                  <Link to="/apple/iphone-11-pro" className="navbar-item">
-                    iPhone 11 Pro
-                  </Link>
-                  <Link to="/apple/iphone-11-pro-max" className="navbar-item">
-                    iPhone 11 Pro Max
-                  </Link>
-                </div>
-              </div>
-
-              <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/straps" className="navbar-link">
-                  Apple Watch
-                </Link>
-                <div className="navbar-dropdown">
-                  <Link to="/leather-straps" className="navbar-item">
-                    Leather Straps
-                  </Link>
-                  <Link to="/steel-straps" className="navbar-item">
-                    Steel Straps
-                  </Link>
-                  <Link to="/sports-straps" className="navbar-item">
-                    Sports Straps
-                  </Link>
-                </div>
-              </div>
-
-              <div className="navbar-item has-dropdown is-hoverable">
-                <Link to="/apple/airpods" className="navbar-link">
-                  Airpods
-                </Link>
-                <div className="navbar-dropdown">
-                  <Link to="/leather-airpods-case" className="navbar-item">
-                    Leather Case
-                  </Link>
-                  <Link to="/silicone-airpods-case" className="navbar-item">
-                    Silicone Case
-                  </Link>
-                </div>
-              </div>
+              {categories &&
+                categories.map(category => (
+                  <div
+                    key={category.id}
+                    className="navbar-item has-dropdown is-hoverable"
+                  >
+                    <Link to={category.slug.current} className="navbar-link">
+                      {category.title}
+                    </Link>
+                    {category.children && category.children.length > 0 ? (
+                      <div className="navbar-dropdown">
+                        {category.children.map(({ node: childCategory }) => (
+                          <Link
+                            key={childCategory.id}
+                            to={childCategory.slug.current}
+                            className="navbar-item"
+                          >
+                            {childCategory.title}
+                          </Link>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                ))}
 
               <div className="navbar-item has-dropdown is-hoverable">
                 <a href="#" className="navbar-link">
