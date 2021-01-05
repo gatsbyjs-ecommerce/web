@@ -29,7 +29,7 @@
     "apollo-client": "^2.6.4",
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "cleave.js": "^1.5.3",
     "currency.js": "^1.2.2",
     "dayjs": "^1.8.16",
